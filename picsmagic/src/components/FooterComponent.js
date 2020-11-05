@@ -19,7 +19,7 @@ function Footer(props) {
 		              <i className="fa fa-phone fa-lg"></i>: +3678882736<br />
 		              <i className="fa fa-fax fa-lg"></i>: +852 8765 4321<br />
 		              <i className="fa fa-envelope fa-lg"></i>: <a href="mailto:picsmagic@mcmaster.ca">
-                      picsmagic@mcmaster.ca</a>
+                      magic@mcmaster.ca</a>
                     </address>
                 </div>
             <div className="row justify-content-center">             
