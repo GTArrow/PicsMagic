@@ -28,6 +28,7 @@ class Home extends Component {
   }
   imageEditor = React.createRef();
   
+  //Saving method. Will be used later
   saveImageToDisk (){
     const imageEditorInst = this.imageEditor.current.imageEditorInst;
     const data = imageEditorInst.toDataURL();
@@ -82,9 +83,11 @@ class Home extends Component {
                     />
                 </div>
             </div>
+            {/* This column is for the left sub task*/}
             <div className="col-md-2 col-12 order-md-0">
             
             </div> 
+            {/* This column is for the Output button on the right */}
             <div className="col-md col-12 order-md-2">
 
             </div>
