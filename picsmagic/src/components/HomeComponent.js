@@ -50,7 +50,7 @@ class Home extends Component {
   render(){
     return (
         <div className="row row-content">
-            <div className="col-md-9 col-12  order-md-1">
+            <div className="col-md-9 col-12  order-md-1 canvas">
                 <div className="row justify-content-center mb-4">
                     <Button className="mr-3" onClick={this.handleClickButton} color="primary">Basics</Button>{' '}
                     <Button className="mr-3" color="secondary">Filter</Button>{' '}
@@ -59,28 +59,30 @@ class Home extends Component {
                     <Button className="mr-3" color="warning">Text</Button>{' '}
                     <Button  color="danger">Sticker</Button>{' '}
                 </div>
-                <div >
-                    <ImageEditor 
-                    ref={this.imageEditor}
-                    includeUI={{
-                        loadImage: {
-                        path: this.state.imageSrc,
-                        name: "image",
-                        },
-                        theme: myTheme,
-                        uiSize: {
-                        height: `calc(90vh - 210px)`
-                        }
-                    }} 
-                    cssMaxHeight={500}
-                    cssMaxWidth={600}
-                    selectionStyle={{
-                        cornerSize: 60,
-                        cornerStyle:"circle",
-                        cornerColor:"white",
-                        rotatingPointOffset: 70,
-                    }}
-                    />
+                <div className="row">
+                    <div className="offset-md-1 col-md-10">
+                        <ImageEditor 
+                        ref={this.imageEditor}
+                        includeUI={{
+                            loadImage: {
+                            path: this.state.imageSrc,
+                            name: "image",
+                            },
+                            theme: myTheme,
+                            uiSize: {
+                                height: `calc(110vh - 320px)`,
+                            }
+                        }} 
+                        cssMaxHeight={460}
+                        cssMaxWidth={700}
+                        selectionStyle={{
+                            cornerSize: 60,
+                            cornerStyle:"circle",
+                            cornerColor:"white",
+                            rotatingPointOffset: 70,
+                        }}
+                        />
+                    </div>
                 </div>
             </div>
             {/* This column is for the left sub task*/}

@@ -22,6 +22,12 @@
 .tui-image-editor-container{
   background-color:#151515 !important;
 }
+.tui-image-editor-container .tui-image-editor-main{
+  top:0px ;
+}
+.tui-image-editor-container .tui-image-editor-main-container{
+  bottom:0px ;
+}
 button{
   padding: 0px 5px 0px 5px;
 }
