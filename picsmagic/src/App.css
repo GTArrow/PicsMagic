@@ -19,6 +19,12 @@
 .footer a{
   color: floralwhite;
 }
+.tui-image-editor-container{
+  background-color:#151515 !important;
+}
+button{
+  padding: 0px 5px 0px 5px;
+}
 .breadCrumb a{
   color: black;
 }

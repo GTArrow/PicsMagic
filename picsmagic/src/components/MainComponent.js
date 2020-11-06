@@ -3,8 +3,8 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Home from './HomeComponent';
 import HelpCenter from './HelpCenter';
+import {Switch, Route,Redirect} from 'react-router-dom';
 import { createBrowserHistory as createHistory } from "history";
-import {Switch, Route,Redirect, Router} from 'react-router-dom';
 const history = createHistory();
 
 class Main extends Component {
@@ -15,13 +15,13 @@ class Main extends Component {
   render() {
     return (
       <div >
-        <Router history={history}>
           <Header/>
-            <Route path="/home" exact component={Home} />
-            <Route path="/helpcenter" component={HelpCenter} />
-            <Redirect to="/home"></Redirect>
+            <Switch history={history}>
+              <Route path="/home" exact component={Home} />
+              <Route path="/helpcenter" component={HelpCenter} />
+              <Redirect to="/home"></Redirect>
+            </Switch>
           <Footer />
-        </Router>
       </div>
     );
   }
