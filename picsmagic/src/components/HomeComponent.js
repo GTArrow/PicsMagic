@@ -79,15 +79,22 @@ class Home extends Component {
   /*Call a function (passed as a prop from the parent component)
    to handle the user-selected file */
   uploadHandleChange (event) {
-    const fileUploaded = URL.createObjectURL(event.target.files[0]);
-    const newImage = {
-        name: fileUploaded,
-        id:this.state.curId+1
+      const files = event.target.files;
+      var fileList=[];
+      var id = this.state.curId;
+      for(var i =0; i<files.length;i++){
+        const fileUploaded = URL.createObjectURL(files[i]);
+        const newImage = {
+            name: fileUploaded,
+            id: id+1
+        }
+        id+=1;
+        fileList.push(newImage);
       }
       this.setState({
-          curId:this.state.curId+1,
-          imageLib: [...this.state.imageLib, newImage]
-      });
+        curId:id,
+        imageLib: this.state.imageLib.concat(fileList)
+    });
   };
 
   render(){
@@ -160,7 +167,7 @@ class Home extends Component {
                                                 </CardTitle>
                                             </CardBody>
                                         </Card>
-                                        <input type="file" accept="image/*" id="input-image-file" 
+                                        <input type="file" multiple accept="image/*" id="input-image-file" 
                                         ref={this.hiddenFileInput}
                                         onChange={this.uploadHandleChange}
                                         style={{display: 'none'}} 
