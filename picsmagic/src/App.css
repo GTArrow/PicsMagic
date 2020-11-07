@@ -19,6 +19,9 @@
 .footer a{
   color: floralwhite;
 }
+.highlight{
+  border: 2px solid #3c3c3c;
+}
 .tui-image-editor-container{
   background-color:#151515 !important;
 }
