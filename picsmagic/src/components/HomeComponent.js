@@ -135,7 +135,7 @@ class Home extends Component {
         <div className="row row-content">
             <div className="col-md-8 col-12  order-md-1 canvas">
                 <div className="row">
-                    <div className="offset-md-1 col-md-10">
+                    <div className=" col-md-10">
                         <ImageEditor 
                         ref={this.imageEditor}
                         includeUI={{
@@ -145,7 +145,8 @@ class Home extends Component {
                             },
                             theme: myTheme,
                             uiSize: {
-                                height: `calc(110vh - 320px)`,
+                                height: '500px',
+                                width: '900px'
                             }
                         }} 
                         cssMaxHeight={460}
@@ -161,9 +162,9 @@ class Home extends Component {
                 </div>
             </div>
             {/* This column is for the left sub task*/}
-            <div className="col-md-2 col-12 order-md-0">
+            <div className="col-md-3 col-12 order-md-0">
                 <div className="row">
-                    <div className="col-md-6 col-12 justify-content-center">
+                    <div className="col-md-4 col-12 justify-content-center">
                         <Nav tabs vertical pills>
                             <NavItem>
                                 <NavLink
@@ -212,7 +213,7 @@ class Home extends Component {
                                     this.toggleTab('5');
                                     }}
                                 >
-                                    Filter
+                                    Sticker
                                 </NavLink>
                             </NavItem>
                             <NavItem>
@@ -237,7 +238,7 @@ class Home extends Component {
                             </NavItem>
                         </Nav>
                     </div>
-                    <div className="col-md col-12 justify-content-center">
+                    <div className="col-md-8 col-12 justify-content-center">
                         <TabContent activeTab={this.state.activeTab}>
                             <TabPane tabId="1">
                             {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
@@ -249,7 +250,7 @@ class Home extends Component {
                             {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
                             </TabPane>
                             <TabPane tabId="4">
-                            {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
+                            <Draw />
                             </TabPane>
                             <TabPane tabId="5">
                             {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
@@ -266,9 +267,9 @@ class Home extends Component {
             
             </div> 
             {/* This column is for the Output button and upload on the right */}
-            <div className="col-md-2 col-12 order-md-2 ">
+            <div className="col-md-1 col-12 order-md-2 ">
                 <div className="row justify-content-center">
-                    <Button className="btn-outline-primary" onClick={this.toggleModal}>Load</Button>{' '}
+                    <Button className="btn-outline-primary top left" onClick={this.toggleModal}>Load</Button>{' '}
                     <Modal className="modal-lg" isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                             <ModalHeader toggle={this.toggleModal}>Select a Picture</ModalHeader>
                             <ModalBody>
@@ -297,6 +298,7 @@ class Home extends Component {
                             <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
                             </ModalFooter>
                         </Modal>
+                        <Button className="btn-outline-secondary top mr" onClick={this.toggleModal}>Download</Button>{' '}
                 </div>
             </div>
             {/*

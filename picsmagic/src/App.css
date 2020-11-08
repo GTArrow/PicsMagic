@@ -47,3 +47,13 @@ address{
 .navbar-dark {
   background-color: #242829;
 }
+.top{
+  position: absolute;
+  top:-64px;
+}
+.left{
+  left:-88px;
+}
+.mr{
+  margin-right:20px;
+}
