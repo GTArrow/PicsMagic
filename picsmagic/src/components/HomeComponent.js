@@ -1,6 +1,14 @@
 import React, { Component, useCallback} from "react";
 import ImageEditor from "@toast-ui/react-image-editor";
-import {Button,Modal,ModalHeader,ModalBody,ModalFooter,Card,CardBody,CardTitle} from "reactstrap";
+import {TabContent, TabPane,Nav, NavItem, NavLink,Button,Modal,ModalHeader,ModalBody,ModalFooter,Card,CardBody,CardTitle} from "reactstrap";
+import Basics from "./BasicsComponent";
+import Filter from "./FilterComponent";
+import Crop from "./CropComponent";
+import Draw from "./DrawComponent";
+import Text from "./TextComponent";
+import Mask from "./MaskComponent";
+import Sticker from "./StickerComponent";
+import classnames from 'classnames';
 const icona = require("tui-image-editor/dist/svg/icon-a.svg");
 const iconb = require("tui-image-editor/dist/svg/icon-b.svg");
 const iconc = require("tui-image-editor/dist/svg/icon-c.svg");
@@ -24,7 +32,8 @@ class Home extends Component {
         isModalOpen:false,
         imageSelected:this.props.imageSelected,
         imageLib : this.props.imageLib,
-        curId:this.props.curId
+        curId:this.props.curId,
+        activeTab:'1'
     }
     this.saveImageToDisk = this.saveImageToDisk.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -32,6 +41,7 @@ class Home extends Component {
     this.checkhighlight = this.checkhighlight.bind(this);
     this.uploadHandleClick = this.uploadHandleClick.bind(this);
     this.uploadHandleChange = this.uploadHandleChange.bind(this);
+    this.toggleTab = this.toggleTab.bind(this);
   }
   imageEditor = React.createRef();
   //handle upload functions
@@ -41,6 +51,13 @@ class Home extends Component {
       this.setState({
         isModalOpen :!this.state.isModalOpen
       });
+  }
+  toggleTab(tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab
+      });
+    }
   }
   confirmModal(){
     const editorInstance = this.imageEditor.current.getInstance();
@@ -97,6 +114,12 @@ class Home extends Component {
     });
   };
 
+  handleFlip(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.flipX();
+
+  }
+
   render(){
     const imgLibrary= this.state.imageLib.map((image)=>{
         return(
@@ -111,14 +134,6 @@ class Home extends Component {
     return (
         <div className="row row-content">
             <div className="col-md-8 col-12  order-md-1 canvas">
-                <div className="row justify-content-center mb-4">
-                    <Button className="mr-3" color="primary">Basics</Button>{' '}
-                    <Button className="mr-3" color="secondary">Filter</Button>{' '}
-                    <Button className="mr-3" color="success">Crop</Button>{' '}
-                    <Button className="mr-3" color="info">Draw</Button>{' '}
-                    <Button className="mr-3" color="warning">Text</Button>{' '}
-                    <Button  color="danger">Sticker</Button>{' '}
-                </div>
                 <div className="row">
                     <div className="offset-md-1 col-md-10">
                         <ImageEditor 
@@ -147,6 +162,107 @@ class Home extends Component {
             </div>
             {/* This column is for the left sub task*/}
             <div className="col-md-2 col-12 order-md-0">
+                <div className="row">
+                    <div className="col-md-6 col-12 justify-content-center">
+                        <Nav tabs vertical pills>
+                            <NavItem>
+                                <NavLink
+                                    className={classnames({active: this.state.activeTab === '1'})}
+                                    onClick={() => {
+                                    this.toggleTab('1');
+                                    }}
+                                >
+                                    Basics
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink
+                                    className={classnames({active: this.state.activeTab === '2'})}
+                                    onClick={() => {
+                                    this.toggleTab('2');
+                                    }}
+                                >
+                                    Filter
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink
+                                    className={classnames({active: this.state.activeTab === '3'})}
+                                    onClick={() => {
+                                    this.toggleTab('3');
+                                    }}
+                                >
+                                    Crop
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink
+                                    className={classnames({active: this.state.activeTab === '4'})}
+                                    onClick={() => {
+                                    this.toggleTab('4');
+                                    }}
+                                >
+                                    Draw
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink
+                                    className={classnames({active: this.state.activeTab === '5'})}
+                                    onClick={() => {
+                                    this.toggleTab('5');
+                                    }}
+                                >
+                                    Filter
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink
+                                    className={classnames({active: this.state.activeTab === '6'})}
+                                    onClick={() => {
+                                    this.toggleTab('6');
+                                    }}
+                                >
+                                    Text
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink
+                                    className={classnames({active: this.state.activeTab === '7'})}
+                                    onClick={() => {
+                                    this.toggleTab('7');
+                                    }}
+                                >
+                                    Mask
+                                </NavLink>
+                            </NavItem>
+                        </Nav>
+                    </div>
+                    <div className="col-md col-12 justify-content-center">
+                        <TabContent activeTab={this.state.activeTab}>
+                            <TabPane tabId="1">
+                            {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
+                            </TabPane>
+                            <TabPane tabId="2">
+                            {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
+                            </TabPane>
+                            <TabPane tabId="3">
+                            {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
+                            </TabPane>
+                            <TabPane tabId="4">
+                            {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
+                            </TabPane>
+                            <TabPane tabId="5">
+                            {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
+                            </TabPane>
+                            <TabPane tabId="6">
+                            {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
+                            </TabPane>
+                            <TabPane tabId="7">
+                            {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
+                            </TabPane>
+                        </TabContent>
+                    </div>
+                </div>
             
             </div> 
             {/* This column is for the Output button and upload on the right */}
