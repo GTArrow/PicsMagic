@@ -89,7 +89,16 @@ function Draw(props){
                             </Media>
                         </Media>
                         </Button>
+                        <hr/>
+                        <Button color='light' active={props.curMode==="edit"}  onClick={()=>props.handleDraw("edit")}> 
+                        <Media >
+                            <Media body>
+                                Edit: <i className="fa fa-mouse-pointer"></i>
+                            </Media>
+                        </Media>
+                        </Button>
                     </CardText>
+                    
                 </CardBody>
             </Card>
         </div>

@@ -90,6 +90,7 @@ class Home extends Component {
   componentDidMount(){
     this.imageEditor.current.getRootElement().children[0].classList.add('d-none');
     this.imageEditor.current.getRootElement().children[1].children[0].classList.add('d-none');
+    this.imageEditor.current.getRootElement().children[1].children[1].children[0].classList.add('d-none');
   }
   //check highlighted picture in upload 
   checkhighlight(img){
@@ -135,12 +136,15 @@ class Home extends Component {
         }
         editorInstance.startDrawingMode('FREE_DRAWING',settings);
         this.setState({curMode:"freedraw"})
-    }else{
+    }else if(mode==="line"){
         if(editorInstance.getDrawingMode()==="LINE_DRAWING"){
             editorInstance.stopDrawingMode();
         }
         editorInstance.startDrawingMode('LINE_DRAWING',settings);
         this.setState({curMode:"straightdraw"})
+    }else{
+        editorInstance.stopDrawingMode();
+        this.setState({curMode:"edit"})
     }
   }
   handleDrawColor(color){
@@ -204,7 +208,7 @@ class Home extends Component {
                         cssMaxHeight={460}
                         cssMaxWidth={700}
                         selectionStyle={{
-                            cornerSize: 60,
+                            cornerSize: 15,
                             cornerStyle:"circle",
                             cornerColor:"white",
                             rotatingPointOffset: 70,

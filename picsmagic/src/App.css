@@ -33,6 +33,9 @@
 .tui-image-editor-container .tui-image-editor-main{
   top:0px ;
 }
+.tui-image-editor-container .tui-image-editor{
+  top:0px !important;
+}
 .tui-image-editor-container .tui-image-editor-main-container{
   bottom:0px ;
 }
