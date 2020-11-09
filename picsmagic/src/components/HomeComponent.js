@@ -29,11 +29,19 @@ class Home extends Component {
   constructor(props){
     super(props);
     this.state={
+        curMode:"normal",
         isModalOpen:false,
         imageSelected:this.props.imageSelected,
         imageLib : this.props.imageLib,
         curId:this.props.curId,
-        activeTab:'1'
+        activeTab:'1',
+        drawColor:{
+            r: '241',
+            g: '112',
+            b: '19',
+            a: '1'
+        },
+        drawRange: { x: 5}
     }
     this.saveImageToDisk = this.saveImageToDisk.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -43,6 +51,7 @@ class Home extends Component {
     this.uploadHandleChange = this.uploadHandleChange.bind(this);
     this.toggleTab = this.toggleTab.bind(this);
   }
+  //Create editor instance reference
   imageEditor = React.createRef();
   //handle upload functions
   hiddenFileInput = React.createRef();
@@ -113,11 +122,54 @@ class Home extends Component {
         imageLib: this.state.imageLib.concat(fileList)
     });
   };
-
-  handleFlip(){
+//Handle Drawing feature
+  handleDraw(mode){
     const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.flipX();
-
+    const settings= {
+        width: this.state.drawRange.x,
+        color: `rgba(${ this.state.drawColor.r }, ${ this.state.drawColor.g }, ${ this.state.drawColor.b }, ${ this.state.drawColor.a })`
+    }
+    if(mode==="free"){
+        if(editorInstance.getDrawingMode()==="FREE_DRAWING"){
+            editorInstance.stopDrawingMode();
+        }
+        editorInstance.startDrawingMode('FREE_DRAWING',settings);
+        this.setState({curMode:"freedraw"})
+    }else{
+        if(editorInstance.getDrawingMode()==="LINE_DRAWING"){
+            editorInstance.stopDrawingMode();
+        }
+        editorInstance.startDrawingMode('LINE_DRAWING',settings);
+        this.setState({curMode:"straightdraw"})
+    }
+  }
+  handleDrawColor(color){
+      this.setState({drawColor:color});
+      const editorInstance = this.imageEditor.current.getInstance();
+      const settings= {
+        width: this.state.drawRange.x,
+        color: `rgba(${ color.r }, ${ color.g }, ${ color.b }, ${ color.a })`
+    }
+      if(editorInstance.getDrawingMode()==='LINE_DRAWING'){
+        editorInstance.stopDrawingMode();
+        editorInstance.startDrawingMode('LINE_DRAWING',settings);
+        return;
+      }
+      editorInstance.setBrush({color: `rgba(${ color.r }, ${ color.g }, ${ color.b }, ${ color.a })`})
+  }
+  handleDrawRange(range){
+      this.setState({drawRange: range});
+      const editorInstance = this.imageEditor.current.getInstance();
+      const settings= {
+        width: range.x,
+        color: `rgba(${ this.state.drawColor.r }, ${ this.state.drawColor.g }, ${ this.state.drawColor.b }, ${ this.state.drawColor.a })`
+    }
+      if(editorInstance.getDrawingMode()==='LINE_DRAWING'){
+        editorInstance.stopDrawingMode();
+        editorInstance.startDrawingMode('LINE_DRAWING',settings);
+        return;
+      }
+      editorInstance.setBrush({width: range.x});
   }
 
   render(){
@@ -250,7 +302,13 @@ class Home extends Component {
                             {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
                             </TabPane>
                             <TabPane tabId="4">
-                            <Draw />
+                            <Draw 
+                            color={this.state.drawColor} 
+                            changeColor={(color)=>this.handleDrawColor(color)}
+                            range={this.state.drawRange}
+                            changeRange={(range)=>this.handleDrawRange(range)}
+                            handleDraw={(mode)=>this.handleDraw(mode)}
+                            curMode={this.state.curMode}/>
                             </TabPane>
                             <TabPane tabId="5">
                             {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
