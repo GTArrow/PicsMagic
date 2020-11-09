@@ -124,6 +124,10 @@ class Home extends Component {
     });
   };
 //Handle Drawing feature
+  stopDrawingMode(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.stopDrawingMode();
+  }
   handleDraw(mode){
     const editorInstance = this.imageEditor.current.getInstance();
     const settings= {
@@ -222,7 +226,7 @@ class Home extends Component {
                 <div className="row">
                     <div className="col-md-4 col-12 justify-content-center">
                         <Nav tabs vertical pills>
-                            <NavItem>
+                            <NavItem onClick={()=>this.stopDrawingMode()}>
                                 <NavLink
                                     className={classnames({active: this.state.activeTab === '1'})}
                                     onClick={() => {
@@ -232,7 +236,7 @@ class Home extends Component {
                                     Basics
                                 </NavLink>
                             </NavItem>
-                            <NavItem>
+                            <NavItem onClick={()=>this.stopDrawingMode()}>
                                 <NavLink
                                     className={classnames({active: this.state.activeTab === '2'})}
                                     onClick={() => {
@@ -242,7 +246,7 @@ class Home extends Component {
                                     Filter
                                 </NavLink>
                             </NavItem>
-                            <NavItem>
+                            <NavItem onClick={()=>this.stopDrawingMode()}>
                                 <NavLink
                                     className={classnames({active: this.state.activeTab === '3'})}
                                     onClick={() => {
@@ -252,7 +256,7 @@ class Home extends Component {
                                     Crop
                                 </NavLink>
                             </NavItem>
-                            <NavItem>
+                            <NavItem onClick={()=>this.stopDrawingMode()}>
                                 <NavLink
                                     className={classnames({active: this.state.activeTab === '4'})}
                                     onClick={() => {
@@ -262,7 +266,7 @@ class Home extends Component {
                                     Draw
                                 </NavLink>
                             </NavItem>
-                            <NavItem>
+                            <NavItem onClick={()=>this.stopDrawingMode()}>
                                 <NavLink
                                     className={classnames({active: this.state.activeTab === '5'})}
                                     onClick={() => {
@@ -272,7 +276,7 @@ class Home extends Component {
                                     Sticker
                                 </NavLink>
                             </NavItem>
-                            <NavItem>
+                            <NavItem onClick={()=>this.stopDrawingMode()}>
                                 <NavLink
                                     className={classnames({active: this.state.activeTab === '6'})}
                                     onClick={() => {
@@ -282,7 +286,7 @@ class Home extends Component {
                                     Text
                                 </NavLink>
                             </NavItem>
-                            <NavItem>
+                            <NavItem onClick={()=>this.stopDrawingMode()}>
                                 <NavLink
                                     className={classnames({active: this.state.activeTab === '7'})}
                                     onClick={() => {
@@ -305,7 +309,7 @@ class Home extends Component {
                             <TabPane tabId="3">
                             {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
                             </TabPane>
-                            <TabPane tabId="4">
+                            <TabPane tabId="4" >
                             <Draw 
                             color={this.state.drawColor} 
                             changeColor={(color)=>this.handleDrawColor(color)}
