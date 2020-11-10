@@ -14,7 +14,7 @@ const iconb = require("tui-image-editor/dist/svg/icon-b.svg");
 const iconc = require("tui-image-editor/dist/svg/icon-c.svg");
 const icond = require("tui-image-editor/dist/svg/icon-d.svg");
 const download = require("downloadjs");
-const myTheme = {
+/*const myTheme = {
   "common.backgroundColor": "#151515",
   "downloadButton.backgroundColor": "white",
   "downloadButton.borderColor": "white",
@@ -23,7 +23,21 @@ const myTheme = {
   "menu.activeIcon.path": iconb,
   "menu.disabledIcon.path": icona,
   "menu.hoverIcon.path": iconc,
-};
+};*/
+function hexToRGBa(hex, alpha) {
+    if(hex===null){return null;}
+    var r = parseInt(hex.slice(1, 3), 16);
+    var g = parseInt(hex.slice(3, 5), 16);
+    var b = parseInt(hex.slice(5, 7), 16);
+    var a = alpha || 1;
+    if (isNaN(r) || isNaN(g) || isNaN(b)) {return null;}
+
+    return {r:r, g:g, b:b, a:a};
+}
+function getRGBaValues(rgb){
+    var colorsOnly = rgb.substring(rgb.indexOf('(') + 1, rgb.lastIndexOf(')')).split(/,\s*/);
+    return {r:colorsOnly[0], g:colorsOnly[1], b:colorsOnly[2], a:colorsOnly[3]}
+}
 
 class Home extends Component {
   constructor(props){
@@ -41,7 +55,18 @@ class Home extends Component {
             b: '19',
             a: '1'
         },
-        drawRange: { x: 5}
+        drawRange: { x: 5},
+        textColor:{
+            r: '255',
+            g: '187',
+            b: '59',
+            a: '1'
+        },
+        textRange: { x: 50},
+        bold:false,
+        italic:false,
+        underline:false,
+        selectedId: 0,
     }
     this.saveImageToDisk = this.saveImageToDisk.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -123,11 +148,42 @@ class Home extends Component {
         imageLib: this.state.imageLib.concat(fileList)
     });
   };
-//Handle Drawing feature
-  stopDrawingMode(){
+//Return back to the Nomal mode befor all features
+stopDrawingMode(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.stopDrawingMode();
   }
+
+//Handle the sleection event when an object is selected
+handleSelection(props){
+    //console.log(props);
+    if(props.type==='i-text'){
+        this.setState({selectedId:props.id});
+        this.setState({textRange:{x:parseInt(props.fontSize, 10)}});
+        this.setState({textColor: (hexToRGBa(props.fill,1)===null)?getRGBaValues(props.fill):hexToRGBa(props.fill,1)});
+        if(props.fontWeight==='bold'){
+            this.setState({bold:true});
+        }else{
+            this.setState({bold:false});
+        }
+        if(props.fontStyle==='italic'){
+            this.setState({italic:true});
+        }else{
+            this.setState({italic:false});
+        }
+        if(props.textDecoration==='underline'){
+            this.setState({underline:true});
+        }else{
+            this.setState({underline:false});
+        }
+        this.setState({curMode:props.textAlign});
+    }
+}
+
+//Handle Drawing features
+startDrawMode(){
+    this.handleDraw('free')
+}
   handleDraw(mode){
     const editorInstance = this.imageEditor.current.getInstance();
     const settings= {
@@ -137,15 +193,17 @@ class Home extends Component {
     if(mode==="free"){
         if(editorInstance.getDrawingMode()==="FREE_DRAWING"){
             editorInstance.stopDrawingMode();
+        }else{
+            editorInstance.startDrawingMode('FREE_DRAWING',settings);
+            this.setState({curMode:"freedraw"})
         }
-        editorInstance.startDrawingMode('FREE_DRAWING',settings);
-        this.setState({curMode:"freedraw"})
     }else if(mode==="line"){
         if(editorInstance.getDrawingMode()==="LINE_DRAWING"){
             editorInstance.stopDrawingMode();
+        }else{
+            editorInstance.startDrawingMode('LINE_DRAWING',settings);
+            this.setState({curMode:"straightdraw"})
         }
-        editorInstance.startDrawingMode('LINE_DRAWING',settings);
-        this.setState({curMode:"straightdraw"})
     }else{
         editorInstance.stopDrawingMode();
         this.setState({curMode:"edit"})
@@ -179,6 +237,83 @@ class Home extends Component {
       }
       editorInstance.setBrush({width: range.x});
   }
+//Handle Text Features
+startTextMode(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    const settings= {
+        width: this.state.textRange.x,
+        color
+        : `rgba(${ this.state.textColor.r }, ${ this.state.textColor.g }, ${ this.state.textColor.b }, ${ this.state.textColor.a })`
+    }
+    if(editorInstance.getDrawingMode()==='TEXT'){
+        editorInstance.stopDrawingMode();
+    }else{
+        editorInstance.startDrawingMode('TEXT',settings);
+    }
+}
+addText(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.startDrawingMode('TEXT');
+    const settings= {
+        styles:{
+            fontSize: 50,
+            fill: `rgba(${ this.state.textColor.r }, ${ this.state.textColor.g }, ${ this.state.textColor.b }, ${ this.state.textColor.a })`
+        },
+        position: {
+            x:350,
+            y: 200
+        }
+    }
+    editorInstance.addText('Double Click',settings);
+
+}
+handleText(mode){
+    const editorInstance = this.imageEditor.current.getInstance();
+    var styleObj;
+    switch (mode) {
+        case 'b':
+            styleObj = {fontWeight: 'bold'};
+            this.setState({bold:!this.state.bold});
+            break;
+        case 'i':
+            styleObj = {fontStyle: 'italic'};
+            this.setState({italic:!this.state.italic});
+            break;
+        case 'u':
+            styleObj = {textDecoration: 'underline'};
+            this.setState({underline:!this.state.underline});
+            break;
+        case 'l':
+            styleObj = {textAlign: 'left'};
+            this.setState({curMode:'left'});
+            break;
+        case 'c':
+            styleObj = {textAlign: 'center'};
+            this.setState({curMode:'center'});
+            break;
+        case 'r':
+            styleObj = {textAlign: 'right'};
+            this.setState({curMode:'right'});
+            break;
+        default:
+            styleObj = {};
+    }
+    editorInstance.changeTextStyle(this.state.selectedId,styleObj);
+  }
+handleTextColor(color){
+    this.setState({textColor:color});
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.changeTextStyle(this.state.selectedId,{
+        'fill': `rgba(${ color.r }, ${ color.g }, ${ color.b }, ${ color.a })`
+    });
+}
+handleTextRange(range){
+    this.setState({textRange: range});
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.changeTextStyle(this.state.selectedId,{
+        fontSize: parseInt(range.x, 10)
+    });
+}
 
   render(){
     const imgLibrary= this.state.imageLib.map((image)=>{
@@ -203,7 +338,7 @@ class Home extends Component {
                             path: this.state.imageSelected.name,
                             name: "image",
                             },
-                            theme: myTheme,
+                            //theme: myTheme,
                             uiSize: {
                                 height: '500px',
                                 width: '900px'
@@ -217,6 +352,7 @@ class Home extends Component {
                             cornerColor:"white",
                             rotatingPointOffset: 70,
                         }}
+                        onObjectActivated={(props)=>this.handleSelection(props)}
                         />
                     </div>
                 </div>
@@ -256,7 +392,7 @@ class Home extends Component {
                                     Crop
                                 </NavLink>
                             </NavItem>
-                            <NavItem onClick={()=>this.stopDrawingMode()}>
+                            <NavItem onClick={()=>this.startDrawMode()}>
                                 <NavLink
                                     className={classnames({active: this.state.activeTab === '4'})}
                                     onClick={() => {
@@ -276,7 +412,7 @@ class Home extends Component {
                                     Sticker
                                 </NavLink>
                             </NavItem>
-                            <NavItem onClick={()=>this.stopDrawingMode()}>
+                            <NavItem onClick={()=>this.startTextMode()}>
                                 <NavLink
                                     className={classnames({active: this.state.activeTab === '6'})}
                                     onClick={() => {
@@ -322,7 +458,18 @@ class Home extends Component {
                             {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
                             </TabPane>
                             <TabPane tabId="6">
-                            {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
+                            <Text 
+                            color={this.state.textColor} 
+                            changeColor={(color)=>this.handleTextColor(color)}
+                            range={this.state.textRange}
+                            changeRange={(range)=>this.handleTextRange(range)}
+                            handleText={(mode)=>this.handleText(mode)}
+                            curMode={this.state.curMode}
+                            bold={this.state.bold}
+                            italic={this.state.italic}
+                            underline={this.state.underline}
+                            addText={()=>this.addText()}
+                            />
                             </TabPane>
                             <TabPane tabId="7">
                             {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
@@ -367,33 +514,6 @@ class Home extends Component {
                         <Button className="btn-outline-secondary top mr" onClick={this.toggleModal}>Download</Button>{' '}
                 </div>
             </div>
-            {/*
-        <ImageEditor
-            includeUI={{
-            loadImage: {
-                path: imageSrc,
-                name: "image",
-            },
-            theme: myTheme,
-            menu: ["crop", "flip", "rotate", "draw", "shape", "text", "filter"],
-            initMenu: "",
-            uiSize: {
-                height: `calc(100vh - 160px)`,
-            },
-            menuBarPosition: "left",
-            }}
-            cssMaxHeight={window.innerHeight-250}
-            cssMaxWidth={window.innerWidth}
-            selectionStyle={{
-            cornerSize: 60,
-            cornerStyle:"circle",
-            cornerColor:"white",
-            rotatingPointOffset: 70,
-            }}
-            usageStatistics={false}
-            ref={imageEditor}
-        /> 
-        */}
         </div>
     );
     }
