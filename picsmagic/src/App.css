@@ -71,3 +71,23 @@ address{
 .css-yvszuv-Slider{
   width:120px !important;
 }
+
+.header{
+  display: block;
+  align-content: center;
+  position: relative;
+  left: 32%;
+}
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  left: 32%;
+  position: relative;
+  display:block;
+}
+
+.header p{
+  font-size: 20px;
+}
+
+
