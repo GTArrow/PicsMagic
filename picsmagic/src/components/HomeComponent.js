@@ -182,6 +182,8 @@ handleSelection(props){
 
 //Handle Drawing features
 startDrawMode(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
     this.handleDraw('free')
 }
   handleDraw(mode){
@@ -240,20 +242,16 @@ startDrawMode(){
 //Handle Text Features
 startTextMode(){
     const editorInstance = this.imageEditor.current.getInstance();
-    const settings= {
-        width: this.state.textRange.x,
-        color
-        : `rgba(${ this.state.textColor.r }, ${ this.state.textColor.g }, ${ this.state.textColor.b }, ${ this.state.textColor.a })`
-    }
+    editorInstance.deactivateAll();
     if(editorInstance.getDrawingMode()==='TEXT'){
         editorInstance.stopDrawingMode();
     }else{
-        editorInstance.startDrawingMode('TEXT',settings);
+        editorInstance.startDrawingMode('TEXT');
     }
 }
 addText(){
     const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.startDrawingMode('TEXT');
+    editorInstance.deactivateAll();
     const settings= {
         styles:{
             fontSize: 50,
