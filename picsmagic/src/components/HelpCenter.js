@@ -1,9 +1,18 @@
-import React, {useState} from 'react';
+import React, {useState, Component} from 'react';
 import { Collapse, Button, CardBody, Card, Form, FormGroup, FormText, Label, Input, Row, Col, Alert } from 'reactstrap';
-import {InputGroup, InputGroupAddon, Modal, ModalBody, ModalHeader, ModalFooter } from 'reactstrap';
-
+import {InputGroup, InputGroupAddon, Modal, ModalBody, ModalHeader, ModalFooter, UncontrolledAlert } from 'reactstrap';
+import SearchField from "react-search-field";
+import { HashLink } from 'react-router-hash-link';
 
 function HelpCenter(props){
+
+    const AlertExample = (props) => {
+        const [isSubmit, setSubmit] = useState(false);
+      
+        const toggleSubmit =() => {setSubmit(true); setFormOpen(!isFormOpen)};
+
+    }
+
     const [isFormOpen, setFormOpen] = useState(false);
     const [isA1Open, setA1Open] = useState(false);
     const [isA2Open, setA2Open] = useState(false);
@@ -13,6 +22,9 @@ function HelpCenter(props){
     const [isA6Open, setA6Open] = useState(false);
 
     const [isSubmit, setSubmit] = useState(false);
+    const [isSearch, setSearch] = useState(false);
+    const [isrightSearch, setRightSearch] = useState(false);
+    const [searchContent, setSearchContent] = useState([]);
 
     const toggle = () => {setFormOpen(!isFormOpen);setSubmit(false)};
     const toggle1 = () => setA1Open(!isA1Open);
@@ -22,6 +34,30 @@ function HelpCenter(props){
     const toggle5 = () => setA5Open(!isA5Open);
     const toggle6 = () => setA6Open(!isA6Open);
     const toggleSubmit =() => {setSubmit(true); setFormOpen(!isFormOpen)};
+    const onDismiss = () => setSubmit(false);
+    // const toggleRightSearch =() => {setRightSearch(true)};
+    // const toggleSearch =() => {setSearch(true)};
+    // const toggleSearchResult = () => {
+    //     if (searchContent === "How to save my work?"){
+    //         const toggleRightSearch =() => {setRightSearch(true)};
+    //     }else{
+    //         const toggleSearch =() => {setSearch(true)};
+    //     }
+    // }
+    
+
+    function toggleSearchResult(value) {
+        if (value == "How to save my work?"){
+            setA6Open(true);
+            setSearch(false);
+        }else if (value == ''){
+            setSearch(false);
+            setRightSearch(false);
+        }else{
+            setSearch(true);
+            setRightSearch(false);
+       }
+    }
 
 
 
@@ -36,15 +72,25 @@ function HelpCenter(props){
 
             <div class="input-group mb-3">
                 <InputGroup>
-                    <InputGroupAddon addonType="prepend"><Button onClick={toggle}>Contact Us</Button></InputGroupAddon>
-                    <Input placeholder="Please type your question here" />
-                    <InputGroupAddon addonType="append"><Button>Search</Button></InputGroupAddon>
-                    
+                    <Input placeholder="Please type your question here" onChange={e => setSearchContent(e.target.value)}/>
+                    <InputGroupAddon className='search-icon' addonType="append"><Button outline color="secondary" onClick={() => toggleSearchResult(searchContent)} ><i class="fa fa-search fa-1x" aria-hidden="true"></i>
+                    <HashLink smooth to='/HelpCenter/#question6' active = {isA6Open}>Go</HashLink>
+                    </Button></InputGroupAddon>
+                    <span class="input-group-btn input-space">
+                    <Button className="left" onClick={toggle} color="info">Contact Us</Button>
+                    </span>
+
                 </InputGroup>
 
-                 <Alert color="success" isOpen={isSubmit}>
+                
+
+                 <Alert color="success" isOpen={isSubmit} toggle={onDismiss}>
                     We have received your submission! We will contact you in seven business days regards your issue. Thank you for the patience!
                 </Alert>
+
+                
+                
+
 
                 <Modal className="modal-lg" isOpen={isFormOpen} toggle={toggle}>
                     <ModalHeader toggle={toggle}>Let Us Know How We Can Help</ModalHeader>
@@ -75,7 +121,14 @@ function HelpCenter(props){
                     </Modal>
             </div>
 
-                <div class="card">
+            
+
+            <Alert color="light" isOpen={isSearch}>
+                Sorry... We currently don't have an answer for this question. Please use the "Contact Us" button to submit the issue to help us improve!
+                <br />
+            </Alert>
+
+                <div class="card" id="question1">
                     <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
                         <Row onClick={toggle1}>
@@ -92,7 +145,7 @@ function HelpCenter(props){
                     </Collapse>
                 </div>
 
-                <div class="card">
+                <div class="card" id="question2">
                     <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
                         <Row onClick={toggle2}>
@@ -109,7 +162,7 @@ function HelpCenter(props){
                     </Collapse>
                 </div>
 
-                <div class="card">
+                <div class="card" id="question3">
                     <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
                         <Row onClick={toggle3}>
@@ -126,7 +179,7 @@ function HelpCenter(props){
                     </Collapse>
                 </div>
 
-                <div class="card">
+                <div class="card" id="question4">
                     <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
                         <Row onClick={toggle4}>
@@ -143,7 +196,7 @@ function HelpCenter(props){
                     </Collapse>
                 </div>
 
-                <div class="card">
+                <div class="card" id="question5">
                     <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
                         <Row onClick={toggle5}>
@@ -160,7 +213,9 @@ function HelpCenter(props){
                     </Collapse>
                 </div>
 
-                <div class="card">
+                
+
+                <div class="card" id="question6">
                     <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
                         <Row onClick={toggle6}>
@@ -176,6 +231,7 @@ function HelpCenter(props){
                     </div>
                     </Collapse>
                 </div>
+
                 
             </div>
         </div>
