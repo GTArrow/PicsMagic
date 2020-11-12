@@ -9,11 +9,6 @@
   border-bottom: 1px ridge;
   min-height:560px;
 }
-.row-bar-content {
-  margin:0px auto;
-  border-bottom: 1px ridge;
-  min-height:502px;
-}
 
 .footer{
   background-color: #393939;
@@ -32,9 +27,6 @@
 }
 .tui-image-editor-container .tui-image-editor-main{
   top:0px ;
-}
-.tui-image-editor-container .tui-image-editor{
-  top:0px !important;
 }
 .tui-image-editor-container .tui-image-editor-main-container{
   bottom:0px ;
@@ -57,17 +49,11 @@ address{
 }
 .top{
   position: absolute;
-  top:-71px;
+  top:-64px;
 }
 .left{
   left:-88px;
 }
 .mr{
-  margin-right:30px;
-}
-.card{
-  width: 100%;
-}
-.css-yvszuv-Slider{
-  width:120px !important;
+  margin-right:20px;
 }

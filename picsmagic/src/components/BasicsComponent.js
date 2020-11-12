@@ -1,12 +1,78 @@
 import React from 'react';
-import {Button} from "reactstrap";
-
+import {Card, CardBody,Button,CardText,Nav,NavItem,NavLink} from "reactstrap";
+import Slider from 'react-input-slider';
 function Basics(props){
     return (
-        <div className="container">
-            <div className="row row-content">
-            <Button color="secondary" onClick={()=>props.handleFlip()}> Flip</Button>{' '}
-            </div>
+        <div className="row row-bar-content">
+                            <Card>
+                <CardBody>
+            <CardText>
+                        Exposure:{' '}
+                        <br/>
+                        <Slider
+                            axis="x"
+                            x={props.range.x}
+                            onChange={(range) => props.exposurerange(range)}
+                            xmin={-1}
+                            xmax={1}
+                            xstep={0.01}
+                            styles={{
+                                thumb: {
+                                  width: 20,
+                                  height: 20,
+                                  opacity: 0.8
+                                }
+                              }}
+                        /> 
+                        {' '}{Number(((props.range.x)*100).toFixed(1))}
+            </CardText>
+            <hr/>
+            <CardText>
+                        Noise:{' '}
+                        <br></br>
+                        <Slider
+                            axis="x"
+                            x={props.rangen.x}
+                            onChange={(rangen) => props.noiserange(rangen)}
+                            xmin={0}
+                            xmax={500}
+                            xstep={1}
+                            styles={{
+                                thumb: {
+                                  width: 20,
+                                  height: 20,
+                                  opacity: 0.8
+                                }
+                              }}
+                        /> 
+                        {' '}{Number(((props.rangen.x)/5).toFixed(1))}
+            </CardText>
+            <hr/>
+            <CardText>
+                        Blur:{' '}
+                        <br></br>
+                        <Slider
+                            axis="x"
+                            x={props.rangeb.x}
+                            onChange={(rangeb) => props.blurrange(rangeb)}
+                            xmin={0}
+                            xmax={0.2}
+                            xstep={0.0001}
+                            styles={{
+                                thumb: {
+                                  width: 20,
+                                  height: 20,
+                                  opacity: 0.8
+                                }
+                              }}
+                        /> 
+                        {' '}{Number(((props.rangeb.x)*500).toFixed(1))}
+            </CardText>
+            <hr/>
+            <Button color="secondary" onClick={()=>props.pixelaterange()}>Pixelate</Button>{' '}
+
+</CardBody>
+            </Card>
         </div>
     );
 }

@@ -3,7 +3,7 @@ import ImageEditor from "@toast-ui/react-image-editor";
 import {TabContent, TabPane,Nav, NavItem, NavLink,Button,Modal,ModalHeader,ModalBody,ModalFooter,Card,CardBody,CardTitle} from "reactstrap";
 import Basics from "./BasicsComponent";
 import Filter from "./FilterComponent";
-import Crop from "./CropComponent";
+import Reform from "./CropComponent";
 import Draw from "./DrawComponent";
 import Text from "./TextComponent";
 import Mask from "./MaskComponent";
@@ -67,6 +67,10 @@ class Home extends Component {
         italic:false,
         underline:false,
         selectedId: 0,
+        brightnessrange:{x:0},
+        noiserange:{x:0},
+        pixelaterange:{x:0},
+        blurrange:{x:0},
     }
     this.saveImageToDisk = this.saveImageToDisk.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -312,6 +316,114 @@ handleTextRange(range){
         fontSize: parseInt(range.x, 10)
     });
 }
+handleFlip(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.flipX();
+
+  }
+
+
+  handleFlipy(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.flipY();
+  }
+
+  startcropdrawingmode(size){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    if(editorInstance.getDrawingMode()==='CROPPER'){
+        editorInstance.stopDrawingMode();
+    }else{
+        editorInstance.startDrawingMode('CROPPER');
+        editorInstance.setCropzoneRect(size);
+    }
+  }
+
+  Crop(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    //this.setState({croprange:editorInstance.getCropzoneRect()})
+    const axis=editorInstance.getCropzoneRect();
+    editorInstance.deactivateAll();
+    //editorInstance.startcropdrawingmode();
+    //console.log(this.state.croprange);
+    //console.log(axis);
+    
+    editorInstance.crop(axis);
+  }
+
+
+  xxx(props){
+    return console.log(props);
+  }
+
+  Rotate(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.rotate(90);
+  }
+  Rotate2(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.rotate(-90);
+  }
+
+  GrayscaleFilter(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.applyFilter('Grayscale');
+  }
+
+  SepiaFilter(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.applyFilter('Sepia');
+  }
+
+  EmbossFilter(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.applyFilter('Emboss');
+  }
+
+  InvertFilter(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.applyFilter('Invert');
+  }
+
+  SharpenFilter(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.applyFilter('Sharpen');
+    
+  }
+
+  handleexposure(range){
+    this.setState({brightnessrange:range});
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.applyFilter('Brightness',{brightness:range.x});
+  }
+
+  handlenoise(range){
+    this.setState({noiserange:range});
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.applyFilter('Noise',{noise:range.x});
+  }
+
+  handlepixelate(){
+    //this.setState({pixelaterange:range});
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.applyFilter('Pixelate');
+  }
+
+  handleblur(range){
+    this.setState({blurrange:range});
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.applyFilter('Blur',{blur:range.x});
+  }
+  undo(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.undo();
+  }
+  clearall(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    editorInstance.clearUndoStack();
+    editorInstance.clearObjects();
+  }
 
   render(){
     const imgLibrary= this.state.imageLib.map((image)=>{
@@ -387,7 +499,7 @@ handleTextRange(range){
                                     this.toggleTab('3');
                                     }}
                                 >
-                                    Crop
+                                    Reform
                                 </NavLink>
                             </NavItem>
                             <NavItem onClick={()=>this.startDrawMode()}>
@@ -430,18 +542,53 @@ handleTextRange(range){
                                     Mask
                                 </NavLink>
                             </NavItem>
+                            <NavItem onClick={()=>this.stopDrawingMode()}>
+                                <NavLink
+                                    onClick={()=>{this.undo()}}
+                                >
+                                    Undo
+                                </NavLink>
+                            </NavItem>
+                            <NavItem onClick={()=>this.stopDrawingMode()}>
+                                <NavLink
+                                    onClick={()=>{this.clearall()}}
+                                >
+                                    ClearAll
+                                </NavLink>
+                            </NavItem>
                         </Nav>
                     </div>
                     <div className="col-md-8 col-12 justify-content-center">
                         <TabContent activeTab={this.state.activeTab}>
                             <TabPane tabId="1">
-                            {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
+                            <Basics 
+                            range={this.state.brightnessrange}
+                            rangen={this.state.noiserange}
+                            rangep={this.state.pixelaterange}
+                            rangeb={this.state.blurrange}
+                            exposurerange={(range)=>this.handleexposure(range)} 
+                            noiserange={(rangen)=>this.handlenoise(rangen)} 
+                            pixelaterange={(rangep)=>this.handlepixelate(rangep)} 
+                            blurrange={(rangeb)=>this.handleblur(rangeb)} 
+                            />
                             </TabPane>
                             <TabPane tabId="2">
-                            {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
+                            <Filter 
+                            GrayscaleFilter={()=>this.GrayscaleFilter()} 
+                            SepiaFilter={()=>this.SepiaFilter()} 
+                            EmbossFilter={()=>this.EmbossFilter()} 
+                            InvertFilter={()=>this.InvertFilter()} 
+                            SharpenFilter={()=>this.SharpenFilter()}/>
                             </TabPane>
                             <TabPane tabId="3">
-                            {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
+                             <Reform 
+                            handleFlip={()=>this.handleFlip()} 
+                            handleFlipy={()=>this.handleFlipy()} 
+                            startcropdrawingmode={(size)=>this.startcropdrawingmode(size)} 
+                            Rotate={()=>this.Rotate()} 
+                            Rotate2={()=>this.Rotate2()}
+                            Crop={()=>this.Crop()}
+                            />
                             </TabPane>
                             <TabPane tabId="4" >
                             <Draw 
