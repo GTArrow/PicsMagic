@@ -90,7 +90,7 @@ function Draw(props){
                         </Media>
                         </Button>
                         <hr/>
-                        <Button color='light' active={props.curMode==="edit"}  onClick={()=>props.handleDraw("edit")}> 
+                        <Button color='primary' outline active={props.curMode==="edit"}  onClick={()=>props.handleDraw("edit")}> 
                         <Media >
                             <Media body>
                                 Edit: <i className="fa fa-mouse-pointer"></i>

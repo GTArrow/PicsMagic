@@ -113,7 +113,7 @@ function Text(props){
                         </Media>
                         </Button>
                         <hr/>
-                        <Button color='light' active={props.curMode==="addtext"}  onClick={()=>props.addText()}> 
+                        <Button color='primary' outline active={props.curMode==="addtext"}  onClick={()=>props.addText()}> 
                         <Media >
                             <Media body>
                             Add New: <i className="fa fa-plus"></i>

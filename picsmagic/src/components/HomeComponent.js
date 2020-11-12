@@ -69,7 +69,6 @@ class Home extends Component {
         selectedId: 0,
         brightnessrange:{x:0},
         noiserange:{x:0},
-        pixelaterange:{x:0},
         blurrange:{x:0},
         cropsize:0,
         selectedImageId: 0,
@@ -78,6 +77,7 @@ class Home extends Component {
         embossselected:false,
         invertselected:false,
         sharpenselected:false,
+        pixelateselected:false
     }
     this.saveImageToDisk = this.saveImageToDisk.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -447,6 +447,19 @@ handleFlip(){
     
   }
 
+  PixelateFilter(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    if(this.state.pixelateselected==false){
+        editorInstance.applyFilter('Pixelate');
+        this.setState({pixelateselected:true});
+    }
+    else{
+        this.setState({pixelateselected:false});
+        editorInstance.removeFilter('Pixelate')
+    }
+    
+  }
+
   handleexposure(range){
     this.setState({brightnessrange:range});
     const editorInstance = this.imageEditor.current.getInstance();
@@ -459,11 +472,6 @@ handleFlip(){
     editorInstance.applyFilter('Noise',{noise:range.x});
   }
 
-  handlepixelate(){
-    //this.setState({pixelaterange:range});
-    const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.applyFilter('Pixelate');
-  }
 
   handleblur(range){
     this.setState({blurrange:range});
@@ -738,11 +746,9 @@ removeSticker(){
                             <Basics 
                             range={this.state.brightnessrange}
                             rangen={this.state.noiserange}
-                            rangep={this.state.pixelaterange}
                             rangeb={this.state.blurrange}
                             exposurerange={(range)=>this.handleexposure(range)} 
                             noiserange={(rangen)=>this.handlenoise(rangen)} 
-                            pixelaterange={(rangep)=>this.handlepixelate(rangep)} 
                             blurrange={(rangeb)=>this.handleblur(rangeb)} 
                             />
                             </TabPane>
@@ -753,11 +759,13 @@ removeSticker(){
                             embossselected={this.state.embossselected}
                             invertselected={this.state.invertselected}
                             sharpenselected={this.state.sharpenselected}
+                            pixelateselected={this.state.pixelateselected}
                             GrayscaleFilter={()=>this.GrayscaleFilter()} 
                             SepiaFilter={()=>this.SepiaFilter()} 
                             EmbossFilter={()=>this.EmbossFilter()} 
                             InvertFilter={()=>this.InvertFilter()} 
-                            SharpenFilter={()=>this.SharpenFilter()}/>
+                            SharpenFilter={()=>this.SharpenFilter()}
+                            PixelateFilter={()=>this.PixelateFilter()}/>
                             </TabPane>
                             <TabPane tabId="3">
                              <Reform 
@@ -861,7 +869,7 @@ removeSticker(){
                             <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
                             </ModalFooter>
                         </Modal>
-                        <Button className="btn-outline-secondary top mr" onClick={this.toggleModal}>Download</Button>{' '}
+                        <Button className="btn-outline-secondary top mr" onClick={()=>this.saveImageToDisk()}>Download</Button>{' '}
                 </div>
             </div>
         </div>

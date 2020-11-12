@@ -99,8 +99,9 @@ function Reform(props){
                                     </Media>
                                 </Media>
                                 </Button>
-                                
-                                <Button color="light" disabled={!isclicked} onClick={()=>props.Crop()}>Apply</Button>{' '}
+                                <div className="row">
+                                <Button color="primary" outline className="ml-3"disabled={!isclicked} onClick={()=>props.Crop()}>Apply</Button>{' '}
+                                </div>
                             </CardText>
                             
                         </CardBody>
