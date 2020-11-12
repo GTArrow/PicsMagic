@@ -55,9 +55,6 @@ address{
   left:-88px;
 }
 .mr{
-<<<<<<< HEAD
-  margin-right:20px;
-=======
   margin-right:30px;
 }
 .card{
@@ -87,5 +84,4 @@ address{
 
 .input-group-btn.input-space {
   padding-left: 15px;
->>>>>>> 894021899bed5c46ac385237cdf17e98245f5a67
 }
