@@ -1,8 +1,8 @@
 import React, {useState, Component} from 'react';
 import { Collapse, Button, CardBody, Card, Form, FormGroup, FormText, Label, Input, Row, Col, Alert } from 'reactstrap';
 import {InputGroup, InputGroupAddon, Modal, ModalBody, ModalHeader, ModalFooter, UncontrolledAlert } from 'reactstrap';
-import SearchField from "react-search-field";
-import { HashLink } from 'react-router-hash-link';
+//import SearchField from "react-search-field";
+//import { HashLink } from 'react-router-hash-link';
 
 function HelpCenter(props){
 
@@ -38,7 +38,7 @@ function HelpCenter(props){
     
 
     function toggleSearchResult(value) {
-        if (value == "How to save my work?"){
+        if (value === "How to save my work?" || value === "How to save my work"){
             setA6Open(true);
             setSearch(false);
         }else if (value == ''){
@@ -64,9 +64,9 @@ function HelpCenter(props){
             <div class="input-group mb-3">
                 <InputGroup>
                     <Input placeholder="Please type your question here" onChange={e => setSearchContent(e.target.value)}/>
-                    <InputGroupAddon addonType="append"><Button className='search-icon'  outline color="secondary"  onClick={() => toggleSearchResult(searchContent)} ><i class="fa fa-search fa-1x" aria-hidden="true"></i>
-                    <HashLink smooth to='/HelpCenter/#question6' active = {isA6Open}> Go to 6</HashLink>
-                    </Button></InputGroupAddon>
+                    <InputGroupAddon addonType="append"><a className='btn btn-outline-secondary search-icon' href={isA6Open?'#question6':'#'} role="button" onClick={() => toggleSearchResult(searchContent)} ><i class="fa fa-search fa-1x" aria-hidden="true"></i>
+                    {/*<HashLink smooth to='/HelpCenter/#question6' active = {isA6Open}> Go to 6</HashLink>*/}
+                    </a></InputGroupAddon>
                     <span class="input-group-btn input-space mt-auto mb-auto">
                     <Button className="left" onClick={toggle} color="info">Contact Us</Button>
                     </span>
@@ -78,10 +78,6 @@ function HelpCenter(props){
                  <Alert color="success" isOpen={isSubmit} toggle={onDismiss}>
                     We have received your submission! We will contact you in seven business days regards your issue. Thank you for the patience!
                 </Alert>
-
-                
-                
-
 
                 <Modal className="modal-lg" isOpen={isFormOpen} toggle={toggle}>
                     <ModalHeader toggle={toggle}>Let Us Know How We Can Help</ModalHeader>
