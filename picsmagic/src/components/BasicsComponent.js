@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, CardBody,Button,CardText,Nav,NavItem,NavLink} from "reactstrap";
+import {Card, CardBody,Button,CardText} from "reactstrap";
 import Slider from 'react-input-slider';
 function Basics(props){
     return (
@@ -69,7 +69,27 @@ function Basics(props){
                         {' '}{Number(((props.rangeb.x)*500).toFixed(1))}
             </CardText>
             <hr/>
-            <Button color="light" onClick={()=>props.pixelaterange()}>Pixelate</Button>{' '}
+            <CardText>
+              <Button color="light" onClick={()=>props.pixelaterange()}>Pixelate</Button>{' '} 
+                       {/* Pixelate:{' '}
+                        <br></br>
+                        <Slider
+                            axis="x"
+                            x={props.rangep.x}
+                            onChange={(rangep) => props.pixelaterange(rangep)}
+                            xmin={0}
+                            xmax={40}
+                            xstep={1}
+                            styles={{
+                                thumb: {
+                                  width: 20,
+                                  height: 20,
+                                  opacity: 0.8
+                                }
+                              }}
+                        /> 
+                        {' '}{props.rangep.x} */}
+            </CardText>
 
 </CardBody>
             </Card>

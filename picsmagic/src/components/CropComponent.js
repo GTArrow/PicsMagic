@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {Collapse,Card, CardBody,Button,CardText,Nav,NavItem,NavLink} from "reactstrap";
+import {Collapse,Card, CardBody,Button,CardText} from "reactstrap";
 
 function Reform(props){
     const [isOpen, setIsOpen] = useState(false);
+    const [isclicked,setisclicked] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
+    const toggle2 = (size) => {setisclicked(true);props.startcropdrawingmode("1")};
     return (
         <div className="row row-bar-content"> 
             <Card>
@@ -37,14 +39,14 @@ function Reform(props){
                                 <Card>
                                 <CardBody>
                                     <CardText>
-                                    <Button color="light" onClick={(size)=>props.startcropdrawingmode("1")}>Square</Button>{' '}
-                                    <Button color="light" onClick={(size)=>props.startcropdrawingmode("1.75")}>4:3</Button>{' '}
+                                    <Button color="light" onClick={(size) => {setisclicked(true);props.startcropdrawingmode("1")}}>Square</Button>{' '}
+                                    <Button color="light" onClick={(size)=>{setisclicked(true);props.startcropdrawingmode("1.75")}}>4:3</Button>{' '}
                                     </CardText><CardText>
-                                    <Button color="light" onClick={(size)=>props.startcropdrawingmode("1.77777")}>16:9</Button>{' '}
+                                    <Button color="light" onClick={(size)=>{setisclicked(true);props.startcropdrawingmode("1.77777")}}>16:9</Button>{' '}
                                     </CardText>
                                     <hr />
                                     <CardText>
-                                    <Button color="light" onClick={()=>props.Crop()}>Confirm</Button>{' '}
+                                    <Button color="light" disabled={!isclicked} onClick={()=>props.Crop()}>Confirm</Button>{' '}
                                 </CardText>
                                 </CardBody>
                                 </Card>

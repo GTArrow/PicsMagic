@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, CardBody,Button,CardText,Nav,NavItem,NavLink} from "reactstrap";
+import {Card, CardBody,CardText,Media} from "reactstrap";
 
 function Filter(props){
     return (
@@ -7,21 +7,54 @@ function Filter(props){
                 <Card>
                 <CardBody>
                             <CardText>
-                                    <img src="/images/filter/grayscale.png" width="60%"onClick={()=>props.GrayscaleFilter()}/>{' '}
-                                    GrayScale
+                                <Media >
+                                    <Media left >
+                                        <Media object src="/images/filter/grayscale.png" width='100' alt="grayscale" onClick={()=>props.GrayscaleFilter()}/>
+                                    </Media>
+                                    <Media body className="mt-auto mb-auto">
+                                        GrayScale
+                                    </Media>
+                                </Media>
                             </CardText>
                             <CardText>
-                                <img src="/images/filter/sepia.png" width="60%"onClick={()=>props.SepiaFilter()}/>{' '}
-                                Sepia
+                                <Media >
+                                    <Media left>
+                                        <Media object src="/images/filter/sepia.png" width='100' alt="grayscale" onClick={()=>props.SepiaFilter()}/>
+                                    </Media>
+                                    <Media body className="mt-auto mb-auto">
+                                    Sepia
+                                    </Media>
+                                </Media>
                             </CardText>
                             <CardText>
-                                <img src="/images/filter/emboss.png" width="60%" onClick={()=>props.EmbossFilter()}/>{' '}Emboss
+                            <Media >
+                                    <Media left>
+                                        <Media object src="/images/filter/emboss.png" width='100' alt="grayscale" onClick={()=>props.EmbossFilter()}/>
+                                    </Media>
+                                    <Media body className="mt-auto mb-auto">
+                                    Emboss
+                                    </Media>
+                                </Media>
                             </CardText>
                             <CardText>
-                                <img src="/images/filter/invert.png" width="60%" onClick={()=>props.InvertFilter()}/>{' '}Invert
+                            <Media >
+                                    <Media left>
+                                        <Media object src="/images/filter/invert.png" width='100' alt="grayscale" onClick={()=>props.InvertFilter()}/>
+                                    </Media>
+                                    <Media body className="mt-auto mb-auto">
+                                    Invert
+                                    </Media>
+                                </Media>
                             </CardText>
                             <CardText>
-                                <img src="/images/filter/sharpen.png" width="60%" onClick={()=>props.SharpenFilter()}/>{' '}Sharpen
+                            <Media >
+                                    <Media left>
+                                        <Media object src="/images/filter/sharpen.png" width='100' alt="grayscale" onClick={()=>props.SharpenFilter()}/>
+                                    </Media>
+                                    <Media body className="mt-auto mb-auto">
+                                    Sharpen
+                                    </Media>
+                                </Media>
                             </CardText>
 </CardBody>
             </Card>

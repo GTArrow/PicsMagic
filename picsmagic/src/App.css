@@ -9,6 +9,9 @@
   border-bottom: 1px ridge;
   min-height:560px;
 }
+.row-bar-content{
+  min-height:501px;
+}
 
 .footer{
   background-color: #393939;
@@ -85,7 +88,10 @@ address{
 .input-group-btn.input-space {
   padding-left: 15px;
 }
-
+.search-icon{
+  border-left: none;
+  border-color: #ced4d9;
+}
 .expand-icon {
   padding-left: 100px;
 }

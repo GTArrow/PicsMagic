@@ -71,6 +71,7 @@ class Home extends Component {
         noiserange:{x:0},
         pixelaterange:{x:0},
         blurrange:{x:0},
+        cropsize:0,
     }
     this.saveImageToDisk = this.saveImageToDisk.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -316,6 +317,8 @@ handleTextRange(range){
         fontSize: parseInt(range.x, 10)
     });
 }
+
+//Handle Flip Features
 handleFlip(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.flipX();
@@ -328,6 +331,7 @@ handleFlip(){
     editorInstance.flipY();
   }
 
+//Handle Crop Features
   startcropdrawingmode(size){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
@@ -336,24 +340,17 @@ handleFlip(){
     }else{
         editorInstance.startDrawingMode('CROPPER');
         editorInstance.setCropzoneRect(size);
+        console.log(size);
     }
   }
 
   Crop(){
+    //  if()
     const editorInstance = this.imageEditor.current.getInstance();
-    //this.setState({croprange:editorInstance.getCropzoneRect()})
     const axis=editorInstance.getCropzoneRect();
     editorInstance.deactivateAll();
-    //editorInstance.startcropdrawingmode();
-    //console.log(this.state.croprange);
-    //console.log(axis);
-    
+    console.log(axis);
     editorInstance.crop(axis);
-  }
-
-
-  xxx(props){
-    return console.log(props);
   }
 
   Rotate(){
@@ -365,6 +362,7 @@ handleFlip(){
     editorInstance.rotate(-90);
   }
 
+  //Handle Filter Features
   GrayscaleFilter(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.applyFilter('Grayscale');
@@ -403,7 +401,7 @@ handleFlip(){
     editorInstance.applyFilter('Noise',{noise:range.x});
   }
 
-  handlepixelate(){
+  handlepixelate(range){
     //this.setState({pixelaterange:range});
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.applyFilter('Pixelate');
@@ -414,15 +412,19 @@ handleFlip(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.applyFilter('Blur',{blur:range.x});
   }
+
+  //Handle Undo/Redo/clearAll Features
   undo(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.undo();
   }
+  redo(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.redo();
+  }
   clearall(){
     const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.deactivateAll();
-    editorInstance.clearUndoStack();
-    editorInstance.clearObjects();
+    editorInstance.loadImageFromURL(this.props.imageSelected.name,"image");
   }
 
 //Handle Mask Feature
@@ -623,21 +625,23 @@ handleSticker7(mode){
                                     Mask
                                 </NavLink>
                             </NavItem>
-                            <NavItem onClick={()=>this.stopDrawingMode()}>
-                                <NavLink
-                                    onClick={()=>{this.undo()}}
-                                >
-                                    Undo
-                                </NavLink>
-                            </NavItem>
-                            <NavItem onClick={()=>this.stopDrawingMode()}>
-                                <NavLink
-                                    onClick={()=>{this.clearall()}}
-                                >
-                                    ClearAll
-                                </NavLink>
-                            </NavItem>
                         </Nav>
+                        
+                        <Button color="info" block className="mt-2"
+                            onClick={()=>{this.undo()}}
+                        >
+                            Undo
+                        </Button>
+                        <Button color="warning" block className="mt-2"
+                            onClick={()=>{this.redo()}}
+                        >
+                            Redo
+                        </Button>
+                        <Button color="danger" block className="mt-2"
+                            onClick={()=>{this.clearall()}}
+                        >
+                            Reset
+                        </Button>
                     </div>
                     <div className="col-md-8 col-12 justify-content-center">
                         <TabContent activeTab={this.state.activeTab}>
