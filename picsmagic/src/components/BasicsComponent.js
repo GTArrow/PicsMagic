@@ -69,7 +69,7 @@ function Basics(props){
                         {' '}{Number(((props.rangeb.x)*500).toFixed(1))}
             </CardText>
             <hr/>
-            <Button color="secondary" onClick={()=>props.pixelaterange()}>Pixelate</Button>{' '}
+            <Button color="light" onClick={()=>props.pixelaterange()}>Pixelate</Button>{' '}
 
 </CardBody>
             </Card>

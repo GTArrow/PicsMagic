@@ -10,39 +10,41 @@ function Reform(props){
                 <CardBody>
                             <CardText>
                          
-                                    <Button color="secondary" onClick={()=>props.handleFlip()}>Horizontal Flip</Button>{' '}
+                                    <Button color="light" onClick={()=>props.handleFlip()}>Horizontal Flip</Button>{' '}
                               
                             </CardText>
                             <CardText>
                 
                                 
-                                <Button color="secondary" onClick={()=>props.handleFlipy()}>Vertical Flip</Button>{' '}
+                                <Button color="light" onClick={()=>props.handleFlipy()}>Vertical Flip</Button>{' '}
                        
                             </CardText>
                             <CardText>
                     
-                                <Button color="secondary" onClick={()=>props.Rotate()}>Clockwise Rotate</Button>{' '}
+                                <Button color="light" onClick={()=>props.Rotate()}>Clockwise Rotate</Button>{' '}
                            
                             </CardText>
                             <CardText>
                          
-                                <Button color="secondary" onClick={()=>props.Rotate2()}>Counter-Clockwise Rotate</Button>{' '}
+                                <Button color="light" onClick={()=>props.Rotate2()}>Counter-Clockwise Rotate</Button>{' '}
                         
                             </CardText>
                             <CardText>
                
-                                <Button color="secondary" onClick={toggle}>Crop</Button>{' '}</CardText>
+                                <Button color="light" onClick={toggle}>Crop</Button>{' '}</CardText>
                         
                                 <Collapse isOpen={isOpen}>
                                 <Card>
                                 <CardBody>
                                     <CardText>
-                                    <Button color="secondary" onClick={(size)=>props.startcropdrawingmode("1")}>Square</Button>{' '}
-                                    <Button color="secondary" onClick={(size)=>props.startcropdrawingmode("1.75")}>4:3</Button>{' '}
-                                    <Button color="secondary" onClick={(size)=>props.startcropdrawingmode("1.77777")}>16:9</Button>{' '}
+                                    <Button color="light" onClick={(size)=>props.startcropdrawingmode("1")}>Square</Button>{' '}
+                                    <Button color="light" onClick={(size)=>props.startcropdrawingmode("1.75")}>4:3</Button>{' '}
+                                    </CardText><CardText>
+                                    <Button color="light" onClick={(size)=>props.startcropdrawingmode("1.77777")}>16:9</Button>{' '}
                                     </CardText>
+                                    <hr />
                                     <CardText>
-                                    <Button color="secondary" onClick={()=>props.Crop()}>Confirm</Button>{' '}
+                                    <Button color="light" onClick={()=>props.Crop()}>Confirm</Button>{' '}
                                 </CardText>
                                 </CardBody>
                                 </Card>
