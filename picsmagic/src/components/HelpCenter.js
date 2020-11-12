@@ -25,6 +25,7 @@ function HelpCenter(props){
     const [isSearch, setSearch] = useState(false);
     const [isrightSearch, setRightSearch] = useState(false);
     const [searchContent, setSearchContent] = useState([]);
+    const [ifJump, setJump] = useState(false);
 
     const toggle = () => {setFormOpen(!isFormOpen);setSubmit(false)};
     const toggle1 = () => setA1Open(!isA1Open);
@@ -41,12 +42,15 @@ function HelpCenter(props){
         if (value === "How to save my work?" || value === "How to save my work"){
             setA6Open(true);
             setSearch(false);
+            setJump(true);
         }else if (value == ''){
             setSearch(false);
             setRightSearch(false);
+            setJump(false);
         }else{
             setSearch(true);
             setRightSearch(false);
+            setJump(false);
        }
     }
 
@@ -64,7 +68,7 @@ function HelpCenter(props){
             <div class="input-group mb-3">
                 <InputGroup>
                     <Input placeholder="Please type your question here" onChange={e => setSearchContent(e.target.value)}/>
-                    <InputGroupAddon addonType="append"><a className='btn btn-outline-secondary search-icon' href={isA6Open?'#question6':'#'} role="button" onClick={() => toggleSearchResult(searchContent)} ><i class="fa fa-search fa-1x" aria-hidden="true"></i>
+                    <InputGroupAddon addonType="append"><a className='btn btn-outline-secondary search-icon' href={ifJump ?'#question6':'#'} role="button" onClick={() => toggleSearchResult(searchContent)} ><i class="fa fa-search fa-1x" aria-hidden="true"></i>
                     {/*<HashLink smooth to='/HelpCenter/#question6' active = {isA6Open}> Go to 6</HashLink>*/}
                     </a></InputGroupAddon>
                     <span class="input-group-btn input-space mt-auto mb-auto">
