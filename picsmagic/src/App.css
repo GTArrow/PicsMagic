@@ -92,3 +92,14 @@ address{
   border-left: none;
   border-color: #ced4d9;
 }
+.expand-icon {
+  padding-left: 100px;
+}
+
+.expand-icon2 {
+  padding-left: 55px;
+}
+
+.expand-icon3 {
+  padding-left: 50px;
+}

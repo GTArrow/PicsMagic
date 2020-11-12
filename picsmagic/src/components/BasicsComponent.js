@@ -70,7 +70,7 @@ function Basics(props){
             </CardText>
             <hr/>
             <CardText>
-            <Button color="light" onClick={()=>props.pixelaterange()}>Pixelate</Button>{' '} 
+              <Button color="light" onClick={()=>props.pixelaterange()}>Pixelate</Button>{' '} 
                        {/* Pixelate:{' '}
                         <br></br>
                         <Slider
