@@ -9,7 +9,6 @@ import Text from "./TextComponent";
 import Mask from "./MaskComponent";
 import Sticker from "./StickerComponent";
 import classnames from 'classnames';
-import { Switch } from "react-router-dom";
 const icona = require("tui-image-editor/dist/svg/icon-a.svg");
 const iconb = require("tui-image-editor/dist/svg/icon-b.svg");
 const iconc = require("tui-image-editor/dist/svg/icon-c.svg");
@@ -363,7 +362,6 @@ handleFlip(){
   }
 
   Crop(){
-    //  if()
     const editorInstance = this.imageEditor.current.getInstance();
     const axis=editorInstance.getCropzoneRect();
     editorInstance.deactivateAll();
