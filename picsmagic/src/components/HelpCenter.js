@@ -170,7 +170,7 @@ function HelpCenter(props){
                     Under the "Basic" functionality, you can find three slide bars. <br />
                     The first setting is "Exposure":  you can slide the bar to change the image's brightness. <br />
                     The second setting is "Noise":  you can slide the bar to change the image's noise level<br />
-                    The first setting is "Blur":  you can slide the bar to change the image's blur level. 
+                    The third setting is "Blur":  you can slide the bar to change the image's blur level. 
                     </div>
                     </div>
                     </Collapse>
