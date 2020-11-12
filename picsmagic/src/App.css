@@ -10,7 +10,8 @@
   min-height:560px;
 }
 .row-bar-content{
-  min-height:501px;
+  height:520px;
+  overflow: scroll;
 }
 
 .footer{
