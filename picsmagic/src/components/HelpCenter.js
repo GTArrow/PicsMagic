@@ -126,7 +126,12 @@ function HelpCenter(props){
                     <Collapse isOpen={isA1Open}>
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                        Answer 1
+                    To upload a photo from your local, click on the "load" button on the top right of the Home page.  <br />
+                    With the pop up modal, there is an "upload" button at the very first. <br />
+                    By clicking it, you should see your local folder is open, and you can choose the photo that you wish to upload. <br />
+                    After the successful upload, you should the photo is added to the library. <br />
+                    Click on that photo, and press "confirm" at the bottom of the modal. <br />
+                    The image should be placed on the canvas, and you are good to go!
                     </div>
                     </div>
                     </Collapse>
@@ -143,7 +148,9 @@ function HelpCenter(props){
                     <Collapse isOpen={isA2Open}>
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                        Answer 2
+                    First, click on the "Filter" button on the side navigation bar on the Home page <br />
+                    You can see the various selection of filters, with a  preview of its effect shown on a sample picture. <br />
+                    Click on the filter you want to use, and it will be applied to the image in the canvas. 
                     </div>
                     </div>
                     </Collapse>
@@ -160,7 +167,10 @@ function HelpCenter(props){
                     <Collapse isOpen={isA3Open}>
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                        Answer 3
+                    Under the "Basic" functionality, you can find three slide bars. <br />
+                    The first setting is "Exposure":  you can slide the bar to change the image's brightness. <br />
+                    The second setting is "Noise":  you can slide the bar to change the image's noise level<br />
+                    The first setting is "Blur":  you can slide the bar to change the image's blur level. 
                     </div>
                     </div>
                     </Collapse>
@@ -177,7 +187,11 @@ function HelpCenter(props){
                     <Collapse isOpen={isA4Open}>
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                        Answer 4
+                    To find the stickers, first, navigate to the Home page. <br />
+                    Then, click the "sticker" button on the side navigation bar. <br />
+                    You should see three categories are showed up on the menu. <br />
+                    Click on the categories that you are interested in, and check what stickers are included under this category. <br />
+                    Unfortunately, we don't support custom stickers for now. It will be included in the later version. 
                     </div>
                     </div>
                     </Collapse>
@@ -194,7 +208,10 @@ function HelpCenter(props){
                     <Collapse isOpen={isA5Open}>
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                        Answer 5
+                    First, click on the "Edit" button. <br />
+                    Then, select the draw you want to edit. <br />
+                    You can rotate, flip, resize the drawing that you selected. <br />
+                    However, the color and the range of the draw cannot be edited through the "edit" button. They are finalized to what you selected before. 
                     </div>
                     </div>
                     </Collapse>
@@ -213,7 +230,9 @@ function HelpCenter(props){
                     <Collapse isOpen={isA6Open}>
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                        Answer 6
+                    After finishing the image's editing, you can click on the "Download" button on the top right of the Home page. <br />
+                    By clicking on that button, your work will be downloaded as a png file. <br />
+                    To find where it is downloaded, please check your browser setting for the specific download location. 
                     </div>
                     </div>
                     </Collapse>
