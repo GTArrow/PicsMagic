@@ -8,6 +8,7 @@
   padding: 20px 0px;
   border-bottom: 1px ridge;
   min-height:560px;
+  overflow: scroll;
 }
 .row-bar-content{
   min-height:501px;
