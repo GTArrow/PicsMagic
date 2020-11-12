@@ -71,6 +71,7 @@ class Home extends Component {
         noiserange:{x:0},
         pixelaterange:{x:0},
         blurrange:{x:0},
+        cropsize:0,
     }
     this.saveImageToDisk = this.saveImageToDisk.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -336,18 +337,16 @@ handleFlip(){
     }else{
         editorInstance.startDrawingMode('CROPPER');
         editorInstance.setCropzoneRect(size);
+        console.log(size);
     }
   }
 
   Crop(){
+    //  if()
     const editorInstance = this.imageEditor.current.getInstance();
-    //this.setState({croprange:editorInstance.getCropzoneRect()})
     const axis=editorInstance.getCropzoneRect();
     editorInstance.deactivateAll();
-    //editorInstance.startcropdrawingmode();
-    //console.log(this.state.croprange);
-    //console.log(axis);
-    
+    console.log(axis);
     editorInstance.crop(axis);
   }
 
