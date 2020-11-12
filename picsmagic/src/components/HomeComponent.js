@@ -72,6 +72,7 @@ class Home extends Component {
         pixelaterange:{x:0},
         blurrange:{x:0},
         cropsize:0,
+        selectedImageId: 0,
     }
     this.saveImageToDisk = this.saveImageToDisk.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -182,6 +183,9 @@ handleSelection(props){
             this.setState({underline:false});
         }
         this.setState({curMode:props.textAlign});
+    }
+    if(props.type==='image'){
+        this.setState({selectedImageId:props.id});
     }
 }
 
@@ -434,28 +438,49 @@ startMaskMode(){
     this.handleMask('free');
 }
 
-handleMask(mode){
+handleMask1(mode){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    editorInstance.addImageObject('images/book.jpg');
+    editorInstance.addImageObject('images/Frames/frame1.jpg');
+    console.log(this.state.selectedImageId);
+    
 }
 
-handleSelectedFilter(){
-    var file;
-    var imgUrl;
+handleMask2(mode){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
+    editorInstance.addImageObject('images/Frames/frame2.jpg');
+    console.log(this.state.selectedImageId);
+    
+}
 
+handleMask3(mode){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    editorInstance.addImageObject('images/Frames/frame3.jpg');
+    console.log(this.state.selectedImageId);
+    
+}
 
-    imgUrl = URL.createObjectURL('./images/book.jpg');
-    editorInstance.loadImageFromURL(editorInstance.toDataURL(), 'FilterImage');
-    editorInstance.addImageObject(imgUrl);
+handleMask4(mode){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    editorInstance.addImageObject('images/Frames/frame5.jpg');
+    console.log(this.state.selectedImageId);
+    
 }
 
 applyMask(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    editorInstance.applyFilter('mask');
+    editorInstance.applyFilter('mask',{maskObjId:this.state.selectedImageId});
+    
+}
+
+deleteMask(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    editorInstance.removeObject(this.state.selectedImageId);
 }
 
 //Handle Stick Feature
@@ -468,44 +493,50 @@ startStickerMode(){
 handleSticker1(mode){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    editorInstance.addImageObject('images/mcmlogo1.jpg');
+    editorInstance.addImageObject('images/Sticker/mcmlogo1.jpg');
 
 }
 
 handleSticker2(mode){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    editorInstance.addImageObject('images/mcmlogo2.jpg');
+    editorInstance.addImageObject('images/Sticker/mcmlogo2.jpg');
 }
 
 handleSticker3(mode){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    editorInstance.addImageObject('images/mcmgrad1.jpg');
+    editorInstance.addImageObject('images/Sticker/mcmgrad1.jpg');
 }
 
 handleSticker4(mode){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    editorInstance.addImageObject('images/mcmgrad2.jpg');
+    editorInstance.addImageObject('images/Sticker/mcmgrad2.jpg');
 }
 
 handleSticker5(mode){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    editorInstance.addImageObject('images/mcmeng1.jpg');
+    editorInstance.addImageObject('images/Sticker/mcmeng1.jpg');
 }
 
 handleSticker6(mode){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    editorInstance.addImageObject('images/mcmeng2.jpg');
+    editorInstance.addImageObject('images/Sticker/mcmeng2.jpg');
 }
 
 handleSticker7(mode){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    editorInstance.addImageObject('images/mcmeng3.jpg');
+    editorInstance.addImageObject('images/Sticker/mcmeng3.jpg');
+}
+
+removeSticker(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    editorInstance.removeObject(this.state.selectedImageId);
 }
 
   render(){
@@ -696,6 +727,7 @@ handleSticker7(mode){
                             handleSticker5={(mode)=>this.handleSticker5(mode)}
                             handleSticker6={(mode)=>this.handleSticker6(mode)}
                             handleSticker7={(mode)=>this.handleSticker7(mode)}
+                            removeSticker={()=>this.removeSticker()}
                             curMode={this.state.curMode}
                             />
                             </TabPane>
@@ -715,14 +747,17 @@ handleSticker7(mode){
                             </TabPane>
                             <TabPane tabId="7">
                             {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
-                            {/* <Mask 
+                            <Mask 
                             color={this.state.drawColor} 
                             range={this.state.drawRange}
-                            handleMask={(mode)=>this.handleMask(mode)}
-                            handleSelectedFilter={()=>this.handleSelectedFilter}
+                            handleMask1={(mode)=>this.handleMask1(mode)}
+                            handleMask2={(mode)=>this.handleMask2(mode)}
+                            handleMask3={(mode)=>this.handleMask3(mode)}
+                            handleMask4={(mode)=>this.handleMask4(mode)}
                             applyMask={()=>this.applyMask()}
+                            deleteMask={()=>this.deleteMask()}
                             curMode={this.state.curMode}
-                            /> */}
+                            />
                             </TabPane>
                         </TabContent>
                     </div>
