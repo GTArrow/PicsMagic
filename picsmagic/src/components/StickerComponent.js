@@ -51,7 +51,7 @@ function Sticker(props){
                         <Button outline colour='light' onClick={()=>props.handleSticker1('free')}> 
                         <Media >
                             <Media body>
-                                <Media object src="images/mcmlogo1.jpg" width='50' height = '50' alt="Logo1" />
+                                <Media object src="images/Sticker/mcmlogo1.jpg" width='50' height = '50' alt="Logo1" />
                             </Media>
                         </Media>
                         </Button>
@@ -59,7 +59,7 @@ function Sticker(props){
                         <Button outline colour='light' onClick={()=>props.handleSticker2('free')}> 
                         <Media >
                             <Media body>
-                                <Media object src="images/mcmlogo2.jpg" width='50' height = '50' alt="Logo2" />
+                                <Media object src="images/Sticker/mcmlogo2.jpg" width='50' height = '50' alt="Logo2" />
                             </Media>
                         </Media>
                         </Button>
@@ -82,7 +82,7 @@ function Sticker(props){
                         <Button outline colour='light' onClick={()=>props.handleSticker3('free')}> 
                         <Media >
                             <Media body>
-                                <Media object src="images/mcmgrad1.jpg" width='50' height = '50' alt="Grad1"/>
+                                <Media object src="images/Sticker/mcmgrad1.jpg" width='50' height = '50' alt="Grad1"/>
                             </Media>
                         </Media>
                         </Button>
@@ -90,7 +90,7 @@ function Sticker(props){
                         <Button outline colour='light' onClick={()=>props.handleSticker4('free')}> 
                         <Media >
                             <Media body>
-                                <Media object src="images/mcmgrad2.jpg" width='50'  height = '50'  alt="Grad2"/>
+                                <Media object src="images/Sticker/mcmgrad2.jpg" width='50'  height = '50'  alt="Grad2"/>
                             </Media>
                         </Media>
                         </Button>
@@ -112,7 +112,7 @@ function Sticker(props){
                         <Button outline colour='light' onClick={()=>props.handleSticker5('free')}> 
                         <Media >
                             <Media body>
-                                <Media object src="images/mcmeng1.jpg" width='50' height = '50' alt="Eng1" />
+                                <Media object src="images/Sticker/mcmeng1.jpg" width='50' height = '50' alt="Eng1" />
                             </Media>
                         </Media>
                         </Button>
@@ -120,7 +120,7 @@ function Sticker(props){
                         <Button outline colour='light' onClick={()=>props.handleSticker6('free')}> 
                         <Media >
                             <Media body>
-                                <Media object src="images/mcmeng2.jpg" width='50'  height = '50' alt="Eng2"/>
+                                <Media object src="images/Sticker/mcmeng2.jpg" width='50'  height = '50' alt="Eng2"/>
                             </Media>
                         </Media>
                         </Button>
@@ -130,13 +130,25 @@ function Sticker(props){
                         <Button outline colour='light' onClick={()=>props.handleSticker7('free')}> 
                         <Media >
                             <Media body>
-                                <Media object src="images/mcmeng3.jpg" width='50'  height = '50' alt="Eng2"/>
+                                <Media object src="images/Sticker/mcmeng3.jpg" width='50'  height = '50' alt="Eng2"/>
                             </Media>
                         </Media>
                         </Button>
                     </CardText>
                     </Collapse>
-                    
+
+                    <hr />
+
+                    <CardText>
+                        <Button outline color='danger' active={props.curMode==="free"} onClick={()=>props.removeSticker()}> 
+                        <Media >
+                            <Media body>
+                                Delete
+                            </Media>
+                        </Media>
+                        </Button>
+
+                    </CardText>
                 </CardBody>
 
             </Card>
