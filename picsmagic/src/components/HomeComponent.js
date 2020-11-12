@@ -657,18 +657,22 @@ removeSticker(){
                                 </NavLink>
                             </NavItem>
                         </Nav>
+
+                        <br />
+                        <br />
+                        <br />
                         
-                        <Button color="info" block className="mt-2"
+                        <Button outline color="info" block className="mt-2"
                             onClick={()=>{this.undo()}}
                         >
                             Undo
                         </Button>
-                        <Button color="warning" block className="mt-2"
+                        <Button outline color="warning" block className="mt-2"
                             onClick={()=>{this.redo()}}
                         >
                             Redo
                         </Button>
-                        <Button color="danger" block className="mt-2"
+                        <Button outline color="danger" block className="mt-2"
                             onClick={()=>{this.clearall()}}
                         >
                             Reset

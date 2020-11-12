@@ -1,8 +1,7 @@
 import React,{useState} from 'react';
 import reactCSS from 'reactcss';
 import {Button, Card, CardBody,CardTitle,CardText,Media} from "reactstrap";
-import {TwitterPicker} from 'react-color';
-import Slider from 'react-input-slider';
+
 
 function Mask(props){
     const [dropdownOpen, setOpen] = useState(false);
