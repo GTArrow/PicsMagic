@@ -317,6 +317,8 @@ handleTextRange(range){
         fontSize: parseInt(range.x, 10)
     });
 }
+
+//Handle Flip Features
 handleFlip(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.flipX();
@@ -329,6 +331,7 @@ handleFlip(){
     editorInstance.flipY();
   }
 
+//Handle Crop Features
   startcropdrawingmode(size){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
@@ -350,11 +353,6 @@ handleFlip(){
     editorInstance.crop(axis);
   }
 
-
-  xxx(props){
-    return console.log(props);
-  }
-
   Rotate(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.rotate(90);
@@ -364,6 +362,7 @@ handleFlip(){
     editorInstance.rotate(-90);
   }
 
+  //Handle Filter Features
   GrayscaleFilter(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.applyFilter('Grayscale');
@@ -402,7 +401,7 @@ handleFlip(){
     editorInstance.applyFilter('Noise',{noise:range.x});
   }
 
-  handlepixelate(){
+  handlepixelate(range){
     //this.setState({pixelaterange:range});
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.applyFilter('Pixelate');
@@ -413,15 +412,19 @@ handleFlip(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.applyFilter('Blur',{blur:range.x});
   }
+
+  //Handle Undo/Redo/clearAll Features
   undo(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.undo();
   }
+  redo(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.redo();
+  }
   clearall(){
     const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.deactivateAll();
-    editorInstance.clearUndoStack();
-    editorInstance.clearObjects();
+    editorInstance.loadImageFromURL(this.props.imageSelected.name,"image");
   }
 
 //Handle Mask Feature
@@ -622,21 +625,23 @@ handleSticker7(mode){
                                     Mask
                                 </NavLink>
                             </NavItem>
-                            <NavItem onClick={()=>this.stopDrawingMode()}>
-                                <NavLink
-                                    onClick={()=>{this.undo()}}
-                                >
-                                    Undo
-                                </NavLink>
-                            </NavItem>
-                            <NavItem onClick={()=>this.stopDrawingMode()}>
-                                <NavLink
-                                    onClick={()=>{this.clearall()}}
-                                >
-                                    ClearAll
-                                </NavLink>
-                            </NavItem>
                         </Nav>
+                        
+                        <Button color="info" block className="mt-2"
+                            onClick={()=>{this.undo()}}
+                        >
+                            Undo
+                        </Button>
+                        <Button color="warning" block className="mt-2"
+                            onClick={()=>{this.redo()}}
+                        >
+                            Redo
+                        </Button>
+                        <Button color="danger" block className="mt-2"
+                            onClick={()=>{this.clearall()}}
+                        >
+                            Reset
+                        </Button>
                     </div>
                     <div className="col-md-8 col-12 justify-content-center">
                         <TabContent activeTab={this.state.activeTab}>
