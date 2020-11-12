@@ -3,7 +3,9 @@ import {Media,Card, CardBody,Button,CardText, CardTitle} from "reactstrap";
 
 function Reform(props){
     const [isOpen, setIsOpen] = useState(false);
+    const [isclicked,setisclicked] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
+    const toggle2 = (size) => {setisclicked(true);props.startcropdrawingmode("1")};
     return (
         <div className="row row-bar-content"> 
             <Card>
@@ -98,8 +100,6 @@ function Reform(props){
                                 <hr/>
                                 <Button color="light" onClick={()=>props.Crop()}>Apply</Button>{' '}
                             </CardText>
-
-
                             
                         </CardBody>
             </Card>

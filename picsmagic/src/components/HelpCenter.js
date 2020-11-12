@@ -35,15 +35,6 @@ function HelpCenter(props){
     const toggle6 = () => setA6Open(!isA6Open);
     const toggleSubmit =() => {setSubmit(true); setFormOpen(!isFormOpen)};
     const onDismiss = () => setSubmit(false);
-    // const toggleRightSearch =() => {setRightSearch(true)};
-    // const toggleSearch =() => {setSearch(true)};
-    // const toggleSearchResult = () => {
-    //     if (searchContent === "How to save my work?"){
-    //         const toggleRightSearch =() => {setRightSearch(true)};
-    //     }else{
-    //         const toggleSearch =() => {setSearch(true)};
-    //     }
-    // }
     
 
     function toggleSearchResult(value) {
@@ -74,7 +65,7 @@ function HelpCenter(props){
                 <InputGroup>
                     <Input placeholder="Please type your question here" onChange={e => setSearchContent(e.target.value)}/>
                     <InputGroupAddon addonType="append"><Button className='search-icon'  outline color="secondary"  onClick={() => toggleSearchResult(searchContent)} ><i class="fa fa-search fa-1x" aria-hidden="true"></i>
-                    <HashLink smooth to='/HelpCenter/#question6' active = {isA6Open}></HashLink>
+                    <HashLink smooth to='/HelpCenter/#question6' active = {isA6Open}> Go to 6</HashLink>
                     </Button></InputGroupAddon>
                     <span class="input-group-btn input-space mt-auto mb-auto">
                     <Button className="left" onClick={toggle} color="info">Contact Us</Button>
