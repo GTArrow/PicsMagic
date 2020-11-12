@@ -74,6 +74,11 @@ class Home extends Component {
         blurrange:{x:0},
         cropsize:0,
         selectedImageId: 0,
+        grayscaleselected:false,
+        sepiaselected:false,
+        embossselected:false,
+        invertselected:false,
+        sharpenselected:false,
     }
     this.saveImageToDisk = this.saveImageToDisk.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -385,27 +390,62 @@ handleFlip(){
   //Handle Filter Features
   GrayscaleFilter(){
     const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.applyFilter('Grayscale');
+    if(this.state.grayscaleselected==false){
+        editorInstance.applyFilter('Grayscale');
+        this.setState({grayscaleselected:true});
+    }
+    else{
+        this.setState({grayscaleselected:false});
+        editorInstance.removeFilter('Grayscale');
+    }
   }
 
   SepiaFilter(){
     const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.applyFilter('Sepia');
+    if(this.state.sepiaselected==false){
+        editorInstance.applyFilter('Sepia');
+        this.setState({sepiaselected:true});
+;    }
+    else{
+        this.setState({sepiaselected:false});
+        editorInstance.removeFilter('Sepia');
+    }
   }
 
   EmbossFilter(){
     const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.applyFilter('Emboss');
+    if(this.state.embossselected==false){
+        editorInstance.applyFilter('Emboss');
+        this.setState({embossselected:true});
+}
+    else{
+        this.setState({embossselected:false});
+        editorInstance.removeFilter('Emboss');
+    }
   }
 
   InvertFilter(){
     const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.applyFilter('Invert');
+    if(this.state.invertselected==false){
+        editorInstance.applyFilter('Invert');
+        this.setState({invertselected:true});
+    }
+    else{
+        this.setState({invertselected:false});
+        editorInstance.removeFilter('Invert')
+    }
   }
 
   SharpenFilter(){
     const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.applyFilter('Sharpen');
+    if(this.state.sharpenselected==false){
+        editorInstance.applyFilter('Sharpen');
+        this.setState({sharpenselected:true});
+    }
+    else{
+        this.setState({sharpenselected:false});
+        editorInstance.removeFilter('Sharpen')
+    }
     
   }
 
@@ -710,6 +750,11 @@ removeSticker(){
                             </TabPane>
                             <TabPane tabId="2">
                             <Filter 
+                            grayscaleselected={this.state.grayscaleselected}
+                            sepiaselected={this.state.sepiaselected}
+                            embossselected={this.state.embossselected}
+                            invertselected={this.state.invertselected}
+                            sharpenselected={this.state.sharpenselected}
                             GrayscaleFilter={()=>this.GrayscaleFilter()} 
                             SepiaFilter={()=>this.SepiaFilter()} 
                             EmbossFilter={()=>this.EmbossFilter()} 
@@ -725,6 +770,7 @@ removeSticker(){
                             Rotate2={()=>this.Rotate2()}
                             Crop={()=>this.Crop()}
                             curMode={this.state.curMode}
+                            buttonactive={this.state.cropactive}
                             />
                             </TabPane>
                             <TabPane tabId="4" >
