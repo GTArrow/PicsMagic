@@ -9,6 +9,7 @@ import Text from "./TextComponent";
 import Mask from "./MaskComponent";
 import Sticker from "./StickerComponent";
 import classnames from 'classnames';
+import { Switch } from "react-router-dom";
 const icona = require("tui-image-editor/dist/svg/icon-a.svg");
 const iconb = require("tui-image-editor/dist/svg/icon-b.svg");
 const iconc = require("tui-image-editor/dist/svg/icon-c.svg");
@@ -319,6 +320,7 @@ handleTextRange(range){
 
 //Handle Flip Features
 handleFlip(){
+    this.setState({curMode:'flipX'})
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.flipX();
 
@@ -326,12 +328,24 @@ handleFlip(){
 
 
   handleFlipy(){
+    this.setState({curMode:'flipY'})
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.flipY();
   }
 
 //Handle Crop Features
   startcropdrawingmode(size){
+    switch (size) {
+        case '1':
+            this.setState({curMode:'crop-square'});
+            break;
+        case '1.75':
+            this.setState({curMode:'crop-4-3'});
+            break;
+        case '1.77777':
+            this.setState({curMode:'crop-16-9'});
+            break;
+    }
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
     if(editorInstance.getDrawingMode()==='CROPPER'){
@@ -355,10 +369,12 @@ handleFlip(){
   }
 
   Rotate(){
+    this.setState({curMode:'rotate'})
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.rotate(90);
   }
   Rotate2(){
+    this.setState({curMode:'rotate-counter'})
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.rotate(-90);
   }
@@ -402,7 +418,7 @@ handleFlip(){
     editorInstance.applyFilter('Noise',{noise:range.x});
   }
 
-  handlepixelate(range){
+  handlepixelate(){
     //this.setState({pixelaterange:range});
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.applyFilter('Pixelate');
@@ -674,6 +690,7 @@ handleSticker7(mode){
                             Rotate={()=>this.Rotate()} 
                             Rotate2={()=>this.Rotate2()}
                             Crop={()=>this.Crop()}
+                            curMode={this.state.curMode}
                             />
                             </TabPane>
                             <TabPane tabId="4" >

@@ -76,7 +76,7 @@ function HelpCenter(props){
                     <InputGroupAddon addonType="append"><Button className='search-icon'  outline color="secondary"  onClick={() => toggleSearchResult(searchContent)} ><i class="fa fa-search fa-1x" aria-hidden="true"></i>
                     <HashLink smooth to='/HelpCenter/#question6' active = {isA6Open}></HashLink>
                     </Button></InputGroupAddon>
-                    <span class="input-group-btn input-space">
+                    <span class="input-group-btn input-space mt-auto mb-auto">
                     <Button className="left" onClick={toggle} color="info">Contact Us</Button>
                     </span>
 
