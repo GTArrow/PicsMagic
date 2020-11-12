@@ -93,3 +93,7 @@ address{
 .input-group-btn.input-space {
   padding-left: 15px;
 }
+.search-icon{
+  border-left: none;
+  border-color: #ced4d9;
+}

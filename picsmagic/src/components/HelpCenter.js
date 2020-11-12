@@ -73,8 +73,8 @@ function HelpCenter(props){
             <div class="input-group mb-3">
                 <InputGroup>
                     <Input placeholder="Please type your question here" onChange={e => setSearchContent(e.target.value)}/>
-                    <InputGroupAddon className='search-icon' addonType="append"><Button outline color="secondary" onClick={() => toggleSearchResult(searchContent)} ><i class="fa fa-search fa-1x" aria-hidden="true"></i>
-                    <HashLink smooth to='/HelpCenter/#question6' active = {isA6Open}>Go</HashLink>
+                    <InputGroupAddon addonType="append"><Button className='search-icon'  outline color="secondary"  onClick={() => toggleSearchResult(searchContent)} ><i class="fa fa-search fa-1x" aria-hidden="true"></i>
+                    <HashLink smooth to='/HelpCenter/#question6' active = {isA6Open}></HashLink>
                     </Button></InputGroupAddon>
                     <span class="input-group-btn input-space">
                     <Button className="left" onClick={toggle} color="info">Contact Us</Button>

@@ -313,6 +313,7 @@ handleTextRange(range){
     });
 }
 
+
   render(){
     const imgLibrary= this.state.imageLib.map((image)=>{
         return(

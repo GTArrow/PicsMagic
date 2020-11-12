@@ -5,7 +5,8 @@ function Crop(props){
     return (
         <div className="container">
             <div className="row row-content">
-            <Button color="secondary" onClick={()=>props.handleFlip()}> Flip</Button>{' '}
+            <Button color="secondary" onClick={()=>props.handleCrop()}> Flip</Button>{' '}
+            <Button color="secondary" onClick={()=>props.confirmCrop()}> Flip</Button>{' '}
             </div>
         </div>
     );
