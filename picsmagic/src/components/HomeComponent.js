@@ -425,6 +425,87 @@ handleFlip(){
     editorInstance.clearObjects();
   }
 
+//Handle Mask Feature
+startMaskMode(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    this.handleMask('free');
+}
+
+handleMask(mode){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    editorInstance.addImageObject('images/book.jpg');
+}
+
+handleSelectedFilter(){
+    var file;
+    var imgUrl;
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+
+
+    imgUrl = URL.createObjectURL('./images/book.jpg');
+    editorInstance.loadImageFromURL(editorInstance.toDataURL(), 'FilterImage');
+    editorInstance.addImageObject(imgUrl);
+}
+
+applyMask(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    editorInstance.applyFilter('mask');
+}
+
+//Handle Stick Feature
+startStickerMode(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    this.handleSticker('free');
+}
+
+handleSticker1(mode){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    editorInstance.addImageObject('images/mcmlogo1.jpg');
+
+}
+
+handleSticker2(mode){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    editorInstance.addImageObject('images/mcmlogo2.jpg');
+}
+
+handleSticker3(mode){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    editorInstance.addImageObject('images/mcmgrad1.jpg');
+}
+
+handleSticker4(mode){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    editorInstance.addImageObject('images/mcmgrad2.jpg');
+}
+
+handleSticker5(mode){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    editorInstance.addImageObject('images/mcmeng1.jpg');
+}
+
+handleSticker6(mode){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    editorInstance.addImageObject('images/mcmeng2.jpg');
+}
+
+handleSticker7(mode){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    editorInstance.addImageObject('images/mcmeng3.jpg');
+}
+
   render(){
     const imgLibrary= this.state.imageLib.map((image)=>{
         return(
@@ -532,7 +613,7 @@ handleFlip(){
                                     Text
                                 </NavLink>
                             </NavItem>
-                            <NavItem onClick={()=>this.stopDrawingMode()}>
+                            <NavItem onClick={()=>this.startDrawMode()}>
                                 <NavLink
                                     className={classnames({active: this.state.activeTab === '7'})}
                                     onClick={() => {
@@ -601,6 +682,18 @@ handleFlip(){
                             </TabPane>
                             <TabPane tabId="5">
                             {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
+                            <Sticker 
+                            color={this.state.drawColor} 
+                            range={this.state.drawRange}
+                            handleSticker1={(mode)=>this.handleSticker1(mode)}
+                            handleSticker2={(mode)=>this.handleSticker2(mode)}
+                            handleSticker3={(mode)=>this.handleSticker3(mode)}
+                            handleSticker4={(mode)=>this.handleSticker4(mode)}
+                            handleSticker5={(mode)=>this.handleSticker5(mode)}
+                            handleSticker6={(mode)=>this.handleSticker6(mode)}
+                            handleSticker7={(mode)=>this.handleSticker7(mode)}
+                            curMode={this.state.curMode}
+                            />
                             </TabPane>
                             <TabPane tabId="6">
                             <Text 
@@ -618,6 +711,14 @@ handleFlip(){
                             </TabPane>
                             <TabPane tabId="7">
                             {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
+                            {/* <Mask 
+                            color={this.state.drawColor} 
+                            range={this.state.drawRange}
+                            handleMask={(mode)=>this.handleMask(mode)}
+                            handleSelectedFilter={()=>this.handleSelectedFilter}
+                            applyMask={()=>this.applyMask()}
+                            curMode={this.state.curMode}
+                            /> */}
                             </TabPane>
                         </TabContent>
                     </div>
