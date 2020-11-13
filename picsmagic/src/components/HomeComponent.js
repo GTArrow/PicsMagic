@@ -481,11 +481,6 @@ handleFlip(){
   }
 
 //Handle Mask Feature
-startMaskMode(){
-    const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.deactivateAll();
-    this.handleMask('free');
-}
 
 handleMask1(mode){
     const editorInstance = this.imageEditor.current.getInstance();
@@ -533,11 +528,6 @@ deleteMask(){
 }
 
 //Handle Stick Feature
-startStickerMode(){
-    const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.deactivateAll();
-    this.handleSticker('free');
-}
 
 handleSticker1(mode){
     const editorInstance = this.imageEditor.current.getInstance();
@@ -695,7 +685,7 @@ removeSticker(){
                                     Text
                                 </NavLink>
                             </NavItem>
-                            <NavItem onClick={()=>this.startDrawMode()}>
+                            <NavItem onClick={()=>this.stopDrawingMode()}>
                                 <NavLink
                                     className={classnames({active: this.state.activeTab === '7'})}
                                     onClick={() => {
