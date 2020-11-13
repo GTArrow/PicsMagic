@@ -1,4 +1,4 @@
-import React, { Component, useCallback} from "react";
+import React, { Component} from "react";
 import ImageEditor from "@toast-ui/react-image-editor";
 import {TabContent, TabPane,Nav, NavItem, NavLink,Button,Modal,ModalHeader,ModalBody,ModalFooter,Card,CardBody,CardTitle} from "reactstrap";
 import Basics from "./BasicsComponent";
@@ -9,21 +9,8 @@ import Text from "./TextComponent";
 import Mask from "./MaskComponent";
 import Sticker from "./StickerComponent";
 import classnames from 'classnames';
-const icona = require("tui-image-editor/dist/svg/icon-a.svg");
-const iconb = require("tui-image-editor/dist/svg/icon-b.svg");
-const iconc = require("tui-image-editor/dist/svg/icon-c.svg");
-const icond = require("tui-image-editor/dist/svg/icon-d.svg");
 const download = require("downloadjs");
-/*const myTheme = {
-  "common.backgroundColor": "#151515",
-  "downloadButton.backgroundColor": "white",
-  "downloadButton.borderColor": "white",
-  "downloadButton.color": "black",
-  "menu.normalIcon.path": icond,
-  "menu.activeIcon.path": iconb,
-  "menu.disabledIcon.path": icona,
-  "menu.hoverIcon.path": iconc,
-};*/
+
 function hexToRGBa(hex, alpha) {
     if(hex===null){return null;}
     var r = parseInt(hex.slice(1, 3), 16);

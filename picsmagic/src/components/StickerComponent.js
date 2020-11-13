@@ -25,7 +25,7 @@ function Sticker(props){
     });
     const colorChange= (color)=> props.changeColor(color.rgb);
 
-    const [isLogoOpen, setLogoOpen] = useState(false);
+    const [isLogoOpen, setLogoOpen] = useState(true);
     const [isGradOpen, setGradOpen] = useState(false);
     const [isEngOpen, setEngOpen] = useState(false);
 

@@ -14,7 +14,7 @@ function HelpCenter(props){
     }
 
     const [isFormOpen, setFormOpen] = useState(false);
-    const [isA1Open, setA1Open] = useState(false);
+    const [isA1Open, setA1Open] = useState(true);
     const [isA2Open, setA2Open] = useState(false);
     const [isA3Open, setA3Open] = useState(false);
     const [isA4Open, setA4Open] = useState(false);
@@ -130,12 +130,14 @@ function HelpCenter(props){
                     <Collapse isOpen={isA1Open}>
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                    To upload a photo from your local, click on the "load" button on the top right of the Home page.  <br />
-                    With the pop up modal, there is an "upload" button at the very first. <br />
-                    By clicking it, you should see your local folder is open, and you can choose the photo that you wish to upload. <br />
-                    After the successful upload, you should the photo is added to the library. <br />
-                    Click on that photo, and press "confirm" at the bottom of the modal. <br />
-                    The image should be placed on the canvas, and you are good to go!
+                    <ul>
+                        <li> To upload a photo from your local, click on the <span className="font-weight-bold">"Load"</span> button on the top right of the Home page. </li>
+                        <li>With the pop up modal, there is an <span className="font-weight-bold">"Upload"</span> button at the very first.</li>
+                        <li>By clicking it, you should see your local folder is open, and you can choose the photo that you wish to upload. </li>
+                        <li>After the successful upload, you should the photo is added to the library.</li>
+                        <li>lick on that photo, and press <span className="font-weight-bold">"confirm"</span> at the bottom of the modal. </li>
+                        <li>The image should be placed on the canvas, and you are good to go!</li>
+                    </ul>
                     </div>
                     </div>
                     </Collapse>
@@ -152,9 +154,11 @@ function HelpCenter(props){
                     <Collapse isOpen={isA2Open}>
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                    First, click on the "Filter" button on the side navigation bar on the Home page <br />
-                    You can see the various selection of filters, with a  preview of its effect shown on a sample picture. <br />
-                    Click on the filter you want to use, and it will be applied to the image in the canvas. 
+                        <ul>
+                            <li>First, click on the <span className="font-weight-bold">"Filter"</span> button on the side navigation bar on the Home page </li>
+                            <li>You can see the various selection of filters, with a  preview of its effect shown on a sample picture.</li>
+                            <li>Click on the filter you want to use, and it will be applied to the image in the canvas. </li>
+                        </ul>
                     </div>
                     </div>
                     </Collapse>
@@ -171,10 +175,12 @@ function HelpCenter(props){
                     <Collapse isOpen={isA3Open}>
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                    Under the "Basic" functionality, you can find three slide bars. <br />
-                    The first setting is "Exposure":  you can slide the bar to change the image's brightness. <br />
-                    The second setting is "Noise":  you can slide the bar to change the image's noise level<br />
-                    The third setting is "Blur":  you can slide the bar to change the image's blur level. 
+                    <ul>
+                        <li>Under the <span className="font-weight-bold">"Basic"</span> functionality, you can find three slide bars. </li>
+                        <li>The first setting is <span className="font-weight-bold">"Exposure"</span>:  you can slide the bar to change the image's brightness. </li>
+                        <li>The second setting is <span className="font-weight-bold">"Noise"</span>:  you can slide the bar to change the image's noise level. </li>
+                        <li>The third setting is <span className="font-weight-bold">"Blur"</span>:  you can slide the bar to change the image's blur level. </li>
+                    </ul>
                     </div>
                     </div>
                     </Collapse>
@@ -191,11 +197,13 @@ function HelpCenter(props){
                     <Collapse isOpen={isA4Open}>
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                    To find the stickers, first, navigate to the Home page. <br />
-                    Then, click the "sticker" button on the side navigation bar. <br />
-                    You should see three categories are showed up on the menu. <br />
-                    Click on the categories that you are interested in, and check what stickers are included under this category. <br />
-                    Unfortunately, we don't support custom stickers for now. It will be included in the later version. 
+                    <ul>
+                        <li>To find the stickers, first, navigate to the Home page. </li>
+                        <li>Then, click the <span className="font-weight-bold">"Sticker"</span> button on the side navigation bar.</li>
+                        <li>You should see three categories are showed up on the menu. </li>
+                        <li>Click on the categories that you are interested in, and check what stickers are included under this category. </li>
+                        <li>Unfortunately, we don't support custom stickers for now. It will be included in the later version. </li>
+                    </ul>
                     </div>
                     </div>
                     </Collapse>
@@ -212,10 +220,12 @@ function HelpCenter(props){
                     <Collapse isOpen={isA5Open}>
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                    First, click on the "Edit" button. <br />
-                    Then, select the draw you want to edit. <br />
-                    You can rotate, flip, resize the drawing that you selected. <br />
-                    However, the color and the range of the draw cannot be edited through the "edit" button. They are finalized to what you selected before. 
+                    <ul>
+                        <li>First, click on the <span className="font-weight-bold">"Edit"</span> button. </li>
+                        <li>Then, select the draw you want to edit. </li>
+                        <li>You can rotate, flip, resize the drawing that you selected.</li>
+                        <li>However, the color and the range of the draw cannot be edited through the <span className="font-weight-bold">"Edit"</span> button. They are finalized to what you selected before.  </li>
+                    </ul>
                     </div>
                     </div>
                     </Collapse>
@@ -234,9 +244,12 @@ function HelpCenter(props){
                     <Collapse isOpen={isA6Open}>
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                    After finishing the image's editing, you can click on the "Download" button on the top right of the Home page. <br />
-                    By clicking on that button, your work will be downloaded as a png file. <br />
-                    To find where it is downloaded, please check your browser setting for the specific download location. 
+                    <ul>
+                        <li>After finishing the image's editing, you can click on the <span className="font-weight-bold">"Download"</span> button on the top right of the Home page. </li>
+                        <li>By clicking on that button, your work will be downloaded as a png file.</li>
+                        <li>You can rotate, flip, resize the drawing that you selected.</li>
+                        <li>To find where it is downloaded, please check your browser setting for the specific download location.  </li>
+                    </ul>
                     </div>
                     </div>
                     </Collapse>

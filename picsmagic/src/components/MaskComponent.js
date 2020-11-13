@@ -87,7 +87,8 @@ function Mask(props){
                     <hr />
 
                     <CardText>
-                        <Button color='primary' outline active={props.curMode==="free"} onClick={()=>props.applyMask()}> 
+                        <Button color='primary' outline
+                         active={props.curMode==="free"} onClick={()=>props.applyMask()}> 
                         <Media >
                             <Media body>
                                 Apply
