@@ -213,6 +213,7 @@ handleMouseDown(event, originPointer){
     const editorInstance = this.imageEditor.current.getInstance();
     if(editorInstance.getDrawingMode()!=='CROPPER'){
         this.setState({checkcropmode:false});
+        this.setState({curMode:'normal'});
     }
   }
 
