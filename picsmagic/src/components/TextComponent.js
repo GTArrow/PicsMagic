@@ -40,7 +40,9 @@ function Text(props){
                         <button onClick={toggle}  className="btn " style={styles.color}>{' '}</button>
                             { dropdownOpen ? <div style={ styles.popover }>
                             <div style={ styles.cover } onClick={ toggle }/>
-                            <TwitterPicker onChange={colorChange}/>
+                            <TwitterPicker onChange={colorChange} width="170px" 
+                            colors={['#FF6900', '#FCB900', '#7BDCB5', '#00D084', '#8ED1FC', 
+                            '#0693E3', '#ABB8C3', '#EB144C', '#F78DA7', '#9900EF','#f2f2f2','#0d0d0d']}/>
                             </div> : null }
                     </CardText>
                     <CardText>
