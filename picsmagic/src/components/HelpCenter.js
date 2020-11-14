@@ -89,15 +89,15 @@ function HelpCenter(props){
                             <Form>
                                 <FormGroup>
                                     <Label for="exampleEmail">Name</Label>
-                                    <Input type="name" name="name" id="exampleName" placeholder="Please enter your name." />
+                                    <Input type="name" name="name" id="exampleName" placeholder="Please enter your name" />
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="examplePassword">Email Address</Label>
-                                    <Input type="email" name="email" id="exampleEmail" placeholder="Please enter your email." />
+                                    <Input type="email" name="email" id="exampleEmail" placeholder="Please enter your email" />
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="exampleText">Issues</Label>
-                                    <Input type="textarea" name="text" id="exampleText" placeholder="Let us know what is the issue."/>
+                                    <Input type="textarea" name="text" id="exampleText" placeholder="Let us know what is the issue"/>
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for="exampleFile">Attachments</Label>
