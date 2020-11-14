@@ -53,12 +53,13 @@ class Home extends Component {
         bold:false,
         italic:false,
         underline:false,
-        selectedId: 0,
+        selectedTextId: 0,
+        selectedDrawId: 0,
+        selectedImageId: 0,
         brightnessrange:{x:0},
         noiserange:{x:0},
         blurrange:{x:0},
         cropsize:0,
-        selectedImageId: 0,
         grayscaleselected:false,
         sepiaselected:false,
         embossselected:false,
@@ -156,7 +157,7 @@ stopDrawingMode(){
 handleSelection(props){
     //console.log(props);
     if(props.type==='i-text'){
-        this.setState({selectedId:props.id});
+        this.setState({selectedTextId:props.id});
         this.setState({textRange:{x:parseInt(props.fontSize, 10)}});
         this.setState({textColor: (hexToRGBa(props.fill,1)===null)?getRGBaValues(props.fill):hexToRGBa(props.fill,1)});
         if(props.fontWeight==='bold'){
@@ -175,6 +176,9 @@ handleSelection(props){
             this.setState({underline:false});
         }
         this.setState({curMode:props.textAlign});
+    }
+    if(props.type==='path'){
+        this.setState({selectedDrawId:props.id});
     }
     if(props.type==='image'){
         this.setState({selectedImageId:props.id});
@@ -240,6 +244,11 @@ startDrawMode(){
       }
       editorInstance.setBrush({width: range.x});
   }
+  removeDraw(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.removeObject(this.state.selectedDrawId);
+  }
+
 //Handle Text Features
 startTextMode(){
     const editorInstance = this.imageEditor.current.getInstance();
@@ -264,6 +273,11 @@ addText(){
         }
     }
     editorInstance.addText('Double Click',settings);
+
+}
+removeText(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.removeObject(this.state.selectedTextId);
 
 }
 handleText(mode){
@@ -297,19 +311,19 @@ handleText(mode){
         default:
             styleObj = {};
     }
-    editorInstance.changeTextStyle(this.state.selectedId,styleObj);
+    editorInstance.changeTextStyle(this.state.selectedTextId,styleObj);
   }
 handleTextColor(color){
     this.setState({textColor:color});
     const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.changeTextStyle(this.state.selectedId,{
+    editorInstance.changeTextStyle(this.state.selectedTextId,{
         'fill': `rgba(${ color.r }, ${ color.g }, ${ color.b }, ${ color.a })`
     });
 }
 handleTextRange(range){
     this.setState({textRange: range});
     const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.changeTextStyle(this.state.selectedId,{
+    editorInstance.changeTextStyle(this.state.selectedTextId,{
         fontSize: parseInt(range.x, 10)
     });
 }
@@ -358,6 +372,7 @@ handleFlip(){
     const axis=editorInstance.getCropzoneRect();
     editorInstance.deactivateAll();
     console.log(axis);
+    console.log(editorInstance.getDrawingMode());
     editorInstance.crop(axis);
   }
 
@@ -763,7 +778,8 @@ removeSticker(){
                             range={this.state.drawRange}
                             changeRange={(range)=>this.handleDrawRange(range)}
                             handleDraw={(mode)=>this.handleDraw(mode)}
-                            curMode={this.state.curMode}/>
+                            curMode={this.state.curMode}
+                            removeDraw={()=>this.removeDraw()}/>
                             </TabPane>
                             <TabPane tabId="5">
                             {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
@@ -793,6 +809,7 @@ removeSticker(){
                             italic={this.state.italic}
                             underline={this.state.underline}
                             addText={()=>this.addText()}
+                            removeText={()=>this.removeText()}
                             />
                             </TabPane>
                             <TabPane tabId="7">

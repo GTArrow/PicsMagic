@@ -33,18 +33,20 @@ function Draw(props){
             <Card>
                 <CardBody>
                     <CardTitle tag="h6">
-                        Settings:
+                        Set your brush:
                     </CardTitle>
                     <CardText>
                         Color:{' '}
                         <button onClick={toggle}  className="btn " style={styles.color}>{' '}</button>
                             { dropdownOpen ? <div style={ styles.popover }>
                             <div style={ styles.cover } onClick={ toggle }/>
-                            <TwitterPicker onChange={colorChange}/>
+                            <TwitterPicker onChange={colorChange} width="170px"
+                            colors={['#FF6900', '#FCB900', '#7BDCB5', '#00D084', '#8ED1FC', 
+                            '#0693E3', '#ABB8C3', '#EB144C', '#F78DA7', '#9900EF',' #1a1a1a','#f2f2f2']}/>
                             </div> : null }
                     </CardText>
                     <CardText>
-                        Range:{' '}
+                        Range:{' '}<br/>
                         <Slider
                             axis="x"
                             x={props.range.x}
@@ -66,7 +68,7 @@ function Draw(props){
                     </CardText>
                     <hr/>
                     <CardTitle tag="h6">
-                        Tools:<br/>
+                    Set your line:<br/>
                     </CardTitle>
                     <CardText>
                         <Button active={props.curMode==="freedraw"} color='light' className="mb-2" onClick={()=>props.handleDraw("free")}> 
@@ -90,10 +92,18 @@ function Draw(props){
                         </Media>
                         </Button>
                         <hr/>
-                        <Button color='primary' outline active={props.curMode==="edit"}  onClick={()=>props.handleDraw("edit")}> 
+                        <Button color='primary' outline className="mb-2" active={props.curMode==="edit"}  onClick={()=>props.handleDraw("edit")}> 
                         <Media >
                             <Media body>
                                 Edit: <i className="fa fa-mouse-pointer"></i>
+                            </Media>
+                        </Media>
+                        </Button>
+                        <br/>
+                        <Button color='danger' outline  onClick={()=>props.removeDraw()}> 
+                        <Media >
+                            <Media body>
+                                Delete
                             </Media>
                         </Media>
                         </Button>
