@@ -1,29 +1,8 @@
 import React,{useState} from 'react';
-import reactCSS from 'reactcss';
 import {Button, Card, CardBody,CardTitle,CardText,Media, Collapse} from "reactstrap";
 
 
 function Sticker(props){
-
-    const styles = reactCSS({
-    'default': {
-        color: {
-        background: `rgba(${ props.color.r }, ${ props.color.g }, ${ props.color.b }, ${ props.color.a })`,
-        },
-        popover: {
-        position: 'absolute',
-        zIndex: '2',
-        },
-        cover: {
-        position: 'fixed',
-        top: '0px',
-        right: '0px',
-        bottom: '0px',
-        left: '0px',
-        },
-    },
-    });
-    const colorChange= (color)=> props.changeColor(color.rgb);
 
     const [isLogoOpen, setLogoOpen] = useState(true);
     const [isGradOpen, setGradOpen] = useState(false);
@@ -40,7 +19,7 @@ function Sticker(props){
                     <CardTitle tag="h6" onClick={toggleLogo}>
                     Logo
                     <span className='expand-icon'>
-                    <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+                    <i className="fa fa-hand-o-left" aria-hidden="true"></i>
                     </span>
                     <br/>
                     </CardTitle>
@@ -71,7 +50,7 @@ function Sticker(props){
                     <CardTitle tag="h6" onClick={toggleGrad}>
                         Graduation
                         <span className='expand-icon2'>
-                        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+                        <i className="fa fa-hand-o-left" aria-hidden="true"></i>
                         </span>
                         <br/>
                     </CardTitle>
@@ -101,7 +80,7 @@ function Sticker(props){
                     <CardTitle tag="h6" onClick={toggleEng}>
                        Engineering 
                        <span className='expand-icon3'>
-                       <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+                       <i className="fa fa-hand-o-left" aria-hidden="true"></i>
                         </span>
                        <br/>
                     </CardTitle>

@@ -1,46 +1,8 @@
-import React,{useState} from 'react';
-import reactCSS from 'reactcss';
-import {Button, Card, CardBody,CardTitle,CardText,Media, Tooltip, Alert} from "reactstrap";
+import React from 'react';
+import {Button, Card, CardBody,CardTitle,CardText,Media,  Alert} from "reactstrap";
 
 
 function Mask(props){
-    const [dropdownOpen, setOpen] = useState(false);
-
-    const toggle = () => setOpen(!dropdownOpen);
-    const styles = reactCSS({
-    'default': {
-        color: {
-        background: `rgba(${ props.color.r }, ${ props.color.g }, ${ props.color.b }, ${ props.color.a })`,
-        },
-        popover: {
-        position: 'absolute',
-        zIndex: '2',
-        },
-        cover: {
-        position: 'fixed',
-        top: '0px',
-        right: '0px',
-        bottom: '0px',
-        left: '0px',
-        },
-    },
-    });
-    
-
-    const [isclicked,setisclicked] = useState(false);
-
-    const toggle2 = () => setisclicked(true);
-
-    const [tooltipOpen, setTooltipOpen] = useState(false);
-      
-    const toggleTooltip = () => setTooltipOpen(!tooltipOpen);
-
-    const [isFormOpen, setFormOpen] = useState(false);
-
-    const toggleForm = () => setFormOpen(!isFormOpen)
-
-
-
     return (
         <div className="row row-bar-content">
             <Card>
@@ -54,8 +16,8 @@ function Mask(props){
                         <br/>
                     </CardTitle>
                     <CardText>
-                        <Button color='light' active={props.curMode==="free"}  disabled={props.isclicked} 
-                        onClick={()=>{props.handleMask1('free');props.ismaskclicked(true)}}> 
+                        <Button color='light'  disabled={props.isclicked} 
+                        onClick={()=>{props.handleMask1();props.ismaskclicked(true)}}> 
                         <Media >
                             <Media body>
                                 <Media object src="images/Frames/frame1.jpg" width='50'  height = '100' alt="Frame1"/> 
@@ -63,8 +25,8 @@ function Mask(props){
                         </Media>
                         </Button>
                         {' '}
-                        <Button color='light' active={props.curMode==="free"} disabled={props.isclicked} 
-                        onClick={()=>{props.handleMask2('free');props.ismaskclicked(true)}}> 
+                        <Button color='light'  disabled={props.isclicked} 
+                        onClick={()=>{props.handleMask2();props.ismaskclicked(true)}}> 
                         <Media >
                             <Media body>
                                 <Media object src="images/Frames/frame2.jpg" width='50'  height = '100' alt="Frame2"/> 
@@ -75,8 +37,8 @@ function Mask(props){
                     
                     <CardText>
 
-                    <Button color='light' active={props.curMode==="free"}   disabled={props.isclicked} 
-                    onClick={()=>{props.handleMask3('free');props.ismaskclicked(true)}}> 
+                    <Button color='light'   disabled={props.isclicked} 
+                    onClick={()=>{props.handleMask3();props.ismaskclicked(true)}}> 
                         <Media >
                             <Media body>
                                 <Media object src="images/Frames/frame3.jpg" width='100'  height = '50' alt="Frame3"/> 
@@ -86,8 +48,8 @@ function Mask(props){
                         </CardText>
                     
                         <CardText>
-                        <Button color='light' active={props.curMode==="free"} disabled={props.isclicked} 
-                        onClick={()=>{props.handleMask4('free');props.ismaskclicked(true)}}> 
+                        <Button color='light'  disabled={props.isclicked} 
+                        onClick={()=>{props.handleMask4();props.ismaskclicked(true)}}> 
                         <Media >
                             <Media body>
                                 <Media object src="images/Frames/frame5.jpg" width='100'  height = '50' alt="Frame4"/> 
@@ -101,7 +63,7 @@ function Mask(props){
 
                     <CardText>
                         <Button color='primary' outline
-                         active={props.curMode==="free"} onClick={()=>{props.applyMask();props.ismaskclicked(false)}}> 
+                         disabled={!props.isMaskMode} onClick={()=>{props.applyMask();props.ismaskclicked(false)}}> 
                         <Media >
                             <Media body>
                                 Apply
@@ -110,7 +72,7 @@ function Mask(props){
                         </Button>
                         {' '}
 
-                        <Button outline color='danger' active={props.curMode==="free"} 
+                        <Button outline color='danger' disabled={!props.isMaskMode} 
                         onClick={()=>{props.deleteMask();props.ismaskclicked(false)}}> 
                         <Media >
                             <Media body>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, CardBody,Button,CardText} from "reactstrap";
+import {Card, CardBody,CardText} from "reactstrap";
 import Slider from 'react-input-slider';
 function Basics(props){
     return (

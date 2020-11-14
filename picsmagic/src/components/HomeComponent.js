@@ -1,4 +1,4 @@
-import React, { Component,useState,useEffect} from "react";
+import React, { Component} from "react";
 import ImageEditor from "@toast-ui/react-image-editor";
 import {Tooltip,Media,TabContent, TabPane,Nav, NavItem, NavLink,Button,Modal,ModalHeader,ModalBody,ModalFooter,Card,CardBody,CardTitle, UncontrolledTooltip} from "reactstrap";
 import Basics from "./BasicsComponent";
@@ -56,7 +56,6 @@ class Home extends Component {
         noiserange:{x:0},
         blurrange:{x:0},
         cropsize:0,
-        selectedImageId: 0,
         isModalOpen:false,
         bold:false,
         italic:false,
@@ -69,6 +68,7 @@ class Home extends Component {
         pixelateselected:false,
         checkcropmode:false,
         maskclicked:false,
+        isMaskMode:false,
         tooltipOpen:false,
         tooltipredo:false,
         tooltipreset:false,
@@ -205,8 +205,16 @@ handleSelection(props){
     }
     if(props.type==='image'){
         this.setState({selectedImageId:props.id});
+        this.setState({isMaskMode:true});
     }
 }
+//Handle mouse down event
+handleMouseDown(event, originPointer){
+    const editorInstance = this.imageEditor.current.getInstance();
+    if(editorInstance.getDrawingMode()!=='CROPPER'){
+        this.setState({checkcropmode:false});
+    }
+  }
 
 //Handle Drawing features
 startDrawMode(){
@@ -370,28 +378,23 @@ handleFlip(){
   startcropdrawingmode(size){
     switch (size) {
         case '1':
-            this.setState({curMode:'crop'});
+            this.setState({curMode:'crop-square'});
             break;
         case '1.75':
-            this.setState({curMode:'crop'});
+            this.setState({curMode:'crop-4-3'});
             break;
         case '1.77777':
-            this.setState({curMode:'crop'});
+            this.setState({curMode:'crop-16-9'});
             break;
     }
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
+    this.setState({checkcropmode:true});
     if(editorInstance.getDrawingMode()==='CROPPER'){
         editorInstance.stopDrawingMode();
     }else{
         editorInstance.startDrawingMode('CROPPER');
         editorInstance.setCropzoneRect(size);
-    }
-    if(editorInstance.getDrawingMode()){
-        this.setState({checkcropmode:true});
-    }
-    else{
-        this.setState({checkcropmode:false});
     }
   }
 
@@ -534,27 +537,27 @@ ismaskclicked(condition){
     }
     
 }
-handleMask1(mode){
+handleMask1(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
     editorInstance.addImageObject('images/Frames/frame1.jpg');
 }
 
-handleMask2(mode){
+handleMask2(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
     editorInstance.addImageObject('images/Frames/frame2.jpg')
     
 }
 
-handleMask3(mode){
+handleMask3(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
     editorInstance.addImageObject('images/Frames/frame3.jpg');
     
 }
 
-handleMask4(mode){
+handleMask4(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
     editorInstance.addImageObject('images/Frames/frame5.jpg');
@@ -565,6 +568,7 @@ applyMask(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
     editorInstance.applyFilter('mask',{maskObjId:this.state.selectedImageId});
+    this.setState({isMaskMode:false});
     
 }
 
@@ -572,48 +576,49 @@ deleteMask(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
     editorInstance.removeObject(this.state.selectedImageId);
+    this.setState({isMaskMode:false});
 }
 
 //Handle Stick Feature
 
-handleSticker1(mode){
+handleSticker1(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
     editorInstance.addImageObject('images/Sticker/mcmlogo1.jpg');
 
 }
 
-handleSticker2(mode){
+handleSticker2(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
     editorInstance.addImageObject('images/Sticker/mcmlogo2.jpg');
 }
 
-handleSticker3(mode){
+handleSticker3(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
     editorInstance.addImageObject('images/Sticker/mcmgrad1.jpg');
 }
 
-handleSticker4(mode){
+handleSticker4(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
     editorInstance.addImageObject('images/Sticker/mcmgrad2.jpg');
 }
 
-handleSticker5(mode){
+handleSticker5(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
     editorInstance.addImageObject('images/Sticker/mcmeng1.jpg');
 }
 
-handleSticker6(mode){
+handleSticker6(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
     editorInstance.addImageObject('images/Sticker/mcmeng2.jpg');
 }
 
-handleSticker7(mode){
+handleSticker7(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
     editorInstance.addImageObject('images/Sticker/mcmeng3.jpg');
@@ -648,7 +653,13 @@ removeSticker(){
         sharpenselected:false,
         pixelateselected:false,
         maskclicked:false,
+        bold:false,
+        italic:false,
+        underline:false,
+        curMode:"normal",
+
     })
+    editorInstance.stopDrawingMode();
     editorInstance.loadImageFromURL(this.props.imageSelected.name,"image");
   }
 
@@ -690,6 +701,7 @@ removeSticker(){
                             rotatingPointOffset: 70,
                         }}
                         onObjectActivated={(props)=>this.handleSelection(props)}
+                        onMousedown={(event, originPointer)=>this.handleMouseDown(event, originPointer)}
                         />
                     </div>
                 </div>
@@ -857,13 +869,13 @@ removeSticker(){
                             <Sticker 
                             color={this.state.drawColor} 
                             range={this.state.drawRange}
-                            handleSticker1={(mode)=>this.handleSticker1(mode)}
-                            handleSticker2={(mode)=>this.handleSticker2(mode)}
-                            handleSticker3={(mode)=>this.handleSticker3(mode)}
-                            handleSticker4={(mode)=>this.handleSticker4(mode)}
-                            handleSticker5={(mode)=>this.handleSticker5(mode)}
-                            handleSticker6={(mode)=>this.handleSticker6(mode)}
-                            handleSticker7={(mode)=>this.handleSticker7(mode)}
+                            handleSticker1={()=>this.handleSticker1()}
+                            handleSticker2={()=>this.handleSticker2()}
+                            handleSticker3={()=>this.handleSticker3()}
+                            handleSticker4={()=>this.handleSticker4()}
+                            handleSticker5={()=>this.handleSticker5()}
+                            handleSticker6={()=>this.handleSticker6()}
+                            handleSticker7={()=>this.handleSticker7()}
                             removeSticker={()=>this.removeSticker()}
                             curMode={this.state.curMode}
                             />
@@ -888,13 +900,13 @@ removeSticker(){
                             <Mask 
                             color={this.state.drawColor} 
                             range={this.state.drawRange}
-                            handleMask1={(mode)=>this.handleMask1(mode)}
-                            handleMask2={(mode)=>this.handleMask2(mode)}
-                            handleMask3={(mode)=>this.handleMask3(mode)}
-                            handleMask4={(mode)=>this.handleMask4(mode)}
+                            handleMask1={()=>this.handleMask1()}
+                            handleMask2={()=>this.handleMask2()}
+                            handleMask3={()=>this.handleMask3()}
+                            handleMask4={()=>this.handleMask4()}
                             applyMask={()=>this.applyMask()}
                             deleteMask={()=>this.deleteMask()}
-                            curMode={this.state.curMode}
+                            isMaskMode={this.state.isMaskMode}
                             isclicked={this.state.maskclicked}
                             ismaskclicked={(condition)=>this.ismaskclicked(condition)}
                             />

@@ -1,11 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Media,Card, CardBody,Button,CardText, CardTitle} from "reactstrap";
 
 function Reform(props){
-    const [isOpen, setIsOpen] = useState(false);
-    const [isclicked,setisclicked] = useState(false);
-    const toggle = () => setIsOpen(!isOpen);
-    const toggle2 = () => setisclicked(true);
     return (
         <div className="row row-bar-content"> 
             <Card>
@@ -14,7 +10,7 @@ function Reform(props){
                         Flip:
                     </CardTitle>
                         <CardText>
-                            <Button color='light' className="mb-2" onClick={()=>{props.handleFlip();setisclicked(false)}}> 
+                            <Button color='light' className="mb-2" onClick={()=>{props.handleFlip()}}> 
                             <Media top>
                                 <Media left>
                                     <Media object src="images/flipX.png" width='25' alt="flipX" />
@@ -25,7 +21,7 @@ function Reform(props){
                             </Media>
                             </Button>{" "}
 
-                            <Button color='light' className="mb-2" onClick={()=>{props.handleFlipy();setisclicked(false)}}> 
+                            <Button color='light' className="mb-2" onClick={()=>{props.handleFlipy()}}> 
                             <Media top>
                                 <Media left>
                                     <Media object src="images/flipY.png" width='25' alt="flipY" />
@@ -42,7 +38,7 @@ function Reform(props){
                         Rotate:
                         </CardTitle >
                             <CardText>
-                            <Button color='light' className="mb-2" onClick={()=>{props.Rotate();setisclicked(false)}}> 
+                            <Button color='light' className="mb-2" onClick={()=>{props.Rotate()}}> 
                             <Media top>
                                 <Media left>
                                     <Media object src="images/rotate-clock.png" width='20' alt="rotate-clock" />
@@ -52,7 +48,7 @@ function Reform(props){
                                 </Media>
                             </Media>
                             </Button>{" "}
-                            <Button color='light' className="mb-2" onClick={()=>{props.Rotate2();setisclicked(false)}}> 
+                            <Button color='light' className="mb-2" onClick={()=>{props.Rotate2()}}> 
                             <Media top>
                                 <Media left>
                                     <Media object src="images/rotate-countclock.png" width='20' alt="rotate-counterclock" />
@@ -69,7 +65,7 @@ function Reform(props){
                         Crop:
                         </CardTitle>
                             <CardText>                
-                                <Button active={props.curMode==="crop-square"} color='light' className="mb-2" onClick={(size) => {setisclicked(true);props.startcropdrawingmode("1");}}> 
+                                <Button active={props.curMode==="crop-square"} color='light' className="mb-2" onClick={() => {props.startcropdrawingmode("1")}}> 
                                 <Media top>
                                     <Media left>
                                         <Media object src="images/crop.png" width='20' alt="crop-square" />
@@ -79,7 +75,7 @@ function Reform(props){
                                     </Media>
                                 </Media>
                                 </Button>{" "}
-                                <Button active={props.curMode==="crop-4-3"} color='light' className="mb-2" onClick={(size) => {setisclicked(true);props.startcropdrawingmode("1.75")}}> 
+                                <Button active={props.curMode==="crop-4-3"} color='light' className="mb-2" onClick={() => {props.startcropdrawingmode("1.75")}}> 
                                 <Media top>
                                     <Media left>
                                         <Media object src="images/crop.png" width='20' alt="crop-4-3" />
@@ -89,7 +85,7 @@ function Reform(props){
                                     </Media>
                                 </Media>
                                 </Button>{" "}
-                                <Button active={props.curMode==="crop-16-9"} color='light' className="mb-2" onClick={(size) => {setisclicked(true);props.startcropdrawingmode("1.77777")}}> 
+                                <Button active={props.curMode==="crop-16-9"} color='light' className="mb-2" onClick={() => {props.startcropdrawingmode("1.77777")}}> 
                                 <Media top>
                                     <Media left>
                                         <Media object src="images/crop.png" width='20' alt="crop-16-9" />
