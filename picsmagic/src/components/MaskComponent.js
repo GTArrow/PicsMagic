@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import reactCSS from 'reactcss';
-import {Button, Card, CardBody,CardTitle,CardText,Media} from "reactstrap";
+import {Button, Card, CardBody,CardTitle,CardText,Media, Tooltip, Alert} from "reactstrap";
 
 
 function Mask(props){
@@ -25,10 +25,19 @@ function Mask(props){
         },
     },
     });
-    const images=
-    [
-    {name:"images/book.jpg", maskObjId:1},
-    ]
+    
+
+    const [isclicked,setisclicked] = useState(false);
+
+    const toggle2 = () => setisclicked(true);
+
+    const [tooltipOpen, setTooltipOpen] = useState(false);
+      
+    const toggleTooltip = () => setTooltipOpen(!tooltipOpen);
+
+    const [isFormOpen, setFormOpen] = useState(false);
+
+    const toggleForm = () => setFormOpen(!isFormOpen)
 
 
 
@@ -45,7 +54,7 @@ function Mask(props){
                         <br/>
                     </CardTitle>
                     <CardText>
-                        <Button color='light' active={props.curMode==="free"}  onClick={()=>props.handleMask1('free')}> 
+                        <Button color='light' active={props.curMode==="free"}  disabled={isclicked} onClick={()=>{props.handleMask1('free');setisclicked(true)}}> 
                         <Media >
                             <Media body>
                                 <Media object src="images/Frames/frame1.jpg" width='50'  height = '100' alt="Frame1"/> 
@@ -53,7 +62,7 @@ function Mask(props){
                         </Media>
                         </Button>
                         {' '}
-                        <Button color='light' active={props.curMode==="free"}  onClick={()=>props.handleMask2('free')}> 
+                        <Button color='light' active={props.curMode==="free"} disabled={isclicked} onClick={()=>{props.handleMask2('free');setisclicked(true)}}> 
                         <Media >
                             <Media body>
                                 <Media object src="images/Frames/frame2.jpg" width='50'  height = '100' alt="Frame2"/> 
@@ -64,7 +73,7 @@ function Mask(props){
                     
                     <CardText>
 
-                    <Button color='light' active={props.curMode==="free"}  onClick={()=>props.handleMask3('free')}> 
+                    <Button color='light' active={props.curMode==="free"}   disabled={isclicked} onClick={()=>{props.handleMask3('free');setisclicked(true)}}> 
                         <Media >
                             <Media body>
                                 <Media object src="images/Frames/frame3.jpg" width='100'  height = '50' alt="Frame3"/> 
@@ -74,7 +83,7 @@ function Mask(props){
                         </CardText>
                     
                         <CardText>
-                        <Button color='light' active={props.curMode==="free"}  onClick={()=>props.handleMask4('free')}> 
+                        <Button color='light' active={props.curMode==="free"} disabled={isclicked} onClick={()=>{props.handleMask4('free');setisclicked(true)}}> 
                         <Media >
                             <Media body>
                                 <Media object src="images/Frames/frame5.jpg" width='100'  height = '50' alt="Frame4"/> 
@@ -88,7 +97,7 @@ function Mask(props){
 
                     <CardText>
                         <Button color='primary' outline
-                         active={props.curMode==="free"} onClick={()=>props.applyMask()}> 
+                         active={props.curMode==="free"} onClick={()=>{props.applyMask();setisclicked(false)}}> 
                         <Media >
                             <Media body>
                                 Apply
@@ -97,7 +106,7 @@ function Mask(props){
                         </Button>
                         {' '}
 
-                        <Button outline color='danger' active={props.curMode==="free"} onClick={()=>props.deleteMask()}> 
+                        <Button outline color='danger' active={props.curMode==="free"} onClick={()=>{props.deleteMask();setisclicked(false)}}> 
                         <Media >
                             <Media body>
                                 Delete
@@ -105,6 +114,18 @@ function Mask(props){
                         </Media>
                         </Button>
                     </CardText>
+
+                    <hr />
+
+                    <CardText>
+                         <Alert color="warning" >
+                         <h6 className="alert-heading">Please be Careful!</h6>
+                         <hr />
+                         Once a mask is applied, you can only reset the image to remove the mask. <br />
+                         <hr />
+                         "Reset" button would remove all the current effects on the image. Please download your work before apply a mask.  </Alert>
+
+                     </CardText>
                     
                 </CardBody>
             </Card>
