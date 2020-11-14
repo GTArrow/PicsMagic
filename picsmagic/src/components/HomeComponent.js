@@ -67,6 +67,7 @@ class Home extends Component {
         sharpenselected:false,
         pixelateselected:false,
         checkcropmode:false,
+        cropMode:'normal',
         maskclicked:false,
         isMaskMode:false,
         tooltipOpen:false,
@@ -213,7 +214,7 @@ handleMouseDown(event, originPointer){
     const editorInstance = this.imageEditor.current.getInstance();
     if(editorInstance.getDrawingMode()!=='CROPPER'){
         this.setState({checkcropmode:false});
-        this.setState({curMode:'normal'});
+        this.setState({cropMode:'normal'});
     }
   }
 
@@ -362,7 +363,6 @@ handleTextRange(range){
 
 //Handle Flip Features
 handleFlip(){
-    this.setState({curMode:'flipX'})
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.flipX();
 
@@ -370,7 +370,6 @@ handleFlip(){
 
 
   handleFlipy(){
-    this.setState({curMode:'flipY'})
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.flipY();
   }
@@ -379,13 +378,13 @@ handleFlip(){
   startcropdrawingmode(size){
     switch (size) {
         case '1':
-            this.setState({curMode:'crop-square'});
+            this.setState({cropMode:'crop-square'});
             break;
         case '1.75':
-            this.setState({curMode:'crop-4-3'});
+            this.setState({cropMode:'crop-4-3'});
             break;
         case '1.77777':
-            this.setState({curMode:'crop-16-9'});
+            this.setState({cropMode:'crop-16-9'});
             break;
     }
     const editorInstance = this.imageEditor.current.getInstance();
@@ -410,7 +409,7 @@ handleFlip(){
   cancelcrop(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    this.setState({curMode:'normal',checkcropmode:false})
+    this.setState({cropMode:'normal',checkcropmode:false})
   }
   checkcropmode(){
     const editorInstance = this.imageEditor.current.getInstance();
@@ -423,12 +422,10 @@ handleFlip(){
   }
 
   Rotate(){
-    this.setState({curMode:'rotate'})
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.rotate(90);
   }
   Rotate2(){
-    this.setState({curMode:'rotate-counter'})
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.rotate(-90);
   }
@@ -849,7 +846,7 @@ removeSticker(){
                             Rotate={()=>this.Rotate()} 
                             Rotate2={()=>this.Rotate2()}
                             Crop={()=>this.Crop()}
-                            curMode={this.state.curMode}
+                            curMode={this.state.cropMode}
                             buttonactive={this.state.cropactive}
                             iscropmode={this.state.checkcropmode}
                             cancelcrop={()=>this.cancelcrop()}
