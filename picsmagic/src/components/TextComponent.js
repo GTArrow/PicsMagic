@@ -44,7 +44,7 @@ function Text(props){
                             </div> : null }
                     </CardText>
                     <CardText>
-                        Range:{' '}
+                        Range:{' '}<br/>
                         <Slider
                             axis="x"
                             x={props.range.x}
@@ -65,9 +65,6 @@ function Text(props){
                         /> {props.range.x}
                     </CardText>
                     <hr/>
-                    <CardTitle tag="h6">
-                        Tools:<br/>
-                    </CardTitle>
                     <CardText>
                         <Button color='light' active={props.bold}  onClick={()=>props.handleText("b")}> 
                         <Media >
@@ -113,10 +110,18 @@ function Text(props){
                         </Media>
                         </Button>
                         <hr/>
-                        <Button color='primary' outline active={props.curMode==="addtext"}  onClick={()=>props.addText()}> 
+                        <Button color='primary' className="mb-2"outline onClick={()=>props.addText()}> 
                         <Media >
                             <Media body>
                             Add New: <i className="fa fa-plus"></i>
+                            </Media>
+                        </Media>
+                        </Button>
+                        <br/>
+                        <Button color='danger' outline   onClick={()=>props.removeText()}> 
+                        <Media >
+                            <Media body>
+                            Delete
                             </Media>
                         </Media>
                         </Button>
