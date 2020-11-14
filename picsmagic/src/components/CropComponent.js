@@ -23,7 +23,7 @@ function Reform(props){
                                     Flip X
                                 </Media>
                             </Media>
-                            </Button>
+                            </Button>{" "}
 
                             <Button color='light' className="mb-2" onClick={()=>{props.handleFlipy();setisclicked(false)}}> 
                             <Media top>
@@ -51,7 +51,7 @@ function Reform(props){
                                     90
                                 </Media>
                             </Media>
-                            </Button>
+                            </Button>{" "}
                             <Button color='light' className="mb-2" onClick={()=>{props.Rotate2();setisclicked(false)}}> 
                             <Media top>
                                 <Media left>
@@ -78,7 +78,7 @@ function Reform(props){
                                         Square
                                     </Media>
                                 </Media>
-                                </Button>
+                                </Button>{" "}
                                 <Button active={props.curMode==="crop-4-3"} color='light' className="mb-2" onClick={(size) => {setisclicked(true);props.startcropdrawingmode("1.75")}}> 
                                 <Media top>
                                     <Media left>
@@ -88,7 +88,7 @@ function Reform(props){
                                         4:3
                                     </Media>
                                 </Media>
-                                </Button>
+                                </Button>{" "}
                                 <Button active={props.curMode==="crop-16-9"} color='light' className="mb-2" onClick={(size) => {setisclicked(true);props.startcropdrawingmode("1.77777")}}> 
                                 <Media top>
                                     <Media left>
@@ -98,7 +98,7 @@ function Reform(props){
                                         16:9
                                     </Media>
                                 </Media>
-                                </Button>
+                                </Button>{" "}
                                 <div className="row">
                                 <Button color="primary" outline className="ml-2"disabled={!props.iscropmode} onClick={()=>props.Crop()}>Apply</Button>{' '}
                                 <Button color="danger" outline className="ml-2"disabled={!props.iscropmode} onClick={()=>props.cancelcrop()}>Cancel</Button>{' '}

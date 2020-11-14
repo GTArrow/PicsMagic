@@ -10,7 +10,6 @@ import Mask from "./MaskComponent";
 import Sticker from "./StickerComponent";
 import classnames from 'classnames';
 const download = require("downloadjs");
-
 function hexToRGBa(hex, alpha) {
     if(hex===null){return null;}
     var r = parseInt(hex.slice(1, 3), 16);
@@ -31,7 +30,6 @@ class Home extends Component {
     super(props);
     this.state={
         curMode:"normal",
-        isModalOpen:false,
         imageSelected:this.props.imageSelected,
         imageLib : this.props.imageLib,
         curId:this.props.curId,
@@ -42,18 +40,15 @@ class Home extends Component {
             b: '19',
             a: '1'
         },
-        drawRange: { x: 5},
         textColor:{
             r: '255',
             g: '187',
             b: '59',
             a: '1'
         },
+        drawRange: { x: 5},
         textRange: { x: 50},
         selectedId: 0,
-        bold:false,
-        italic:false,
-        underline:false,
         selectedTextId: 0,
         selectedDrawId: 0,
         selectedImageId: 0,
@@ -62,6 +57,7 @@ class Home extends Component {
         blurrange:{x:0},
         cropsize:0,
         selectedImageId: 0,
+        isModalOpen:false,
         bold:false,
         italic:false,
         underline:false,
@@ -183,7 +179,6 @@ stopDrawingMode(){
 
 //Handle the sleection event when an object is selected
 handleSelection(props){
-    //console.log(props);
     if(props.type==='i-text'){
         this.setState({selectedTextId:props.id});
         this.setState({textRange:{x:parseInt(props.fontSize, 10)}});
@@ -219,7 +214,7 @@ startDrawMode(){
     editorInstance.deactivateAll();
     this.handleDraw('free')
 }
-  handleDraw(mode){
+handleDraw(mode){
     const editorInstance = this.imageEditor.current.getInstance();
     const settings= {
         width: this.state.drawRange.x,
@@ -398,15 +393,12 @@ handleFlip(){
     else{
         this.setState({checkcropmode:false});
     }
-    console.log(editorInstance.getDrawingMode());
   }
 
   Crop(){
     const editorInstance = this.imageEditor.current.getInstance();
     const axis=editorInstance.getCropzoneRect();
     editorInstance.deactivateAll();
-    console.log(axis);
-    console.log(editorInstance.getDrawingMode());
     editorInstance.crop(axis);
     this.setState({checkcropmode:false});
   }
@@ -512,6 +504,7 @@ handleFlip(){
     
   }
 
+  //handle basic feature(with sliders)
   handleexposure(range){
     this.setState({brightnessrange:range});
     const editorInstance = this.imageEditor.current.getInstance();
@@ -529,33 +522,6 @@ handleFlip(){
     this.setState({blurrange:range});
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.applyFilter('Blur',{blur:range.x});
-  }
-
-  //Handle Undo/Redo/clearAll Features
-  undo(){
-    const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.undo();
-  }
-  redo(){
-    const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.redo();
-  }
-  clearall(){
-    const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.deactivateAll();
-    this.setState({    
-        brightnessrange:{x:0},
-        noiserange:{x:0},
-        blurrange:{x:0},
-        grayscaleselected:false,
-        sepiaselected:false,
-        embossselected:false,
-        invertselected:false,
-        sharpenselected:false,
-        pixelateselected:false,
-        maskclicked:false,
-    })
-    editorInstance.loadImageFromURL(this.props.imageSelected.name,"image");
   }
 
 //Handle Mask Feature
@@ -658,6 +624,33 @@ removeSticker(){
     editorInstance.deactivateAll();
     editorInstance.removeObject(this.state.selectedImageId);
 }
+
+  //Handle Undo/Redo/clearAll Features
+  undo(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.undo();
+  }
+  redo(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.redo();
+  }
+  clearall(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    this.setState({    
+        brightnessrange:{x:0},
+        noiserange:{x:0},
+        blurrange:{x:0},
+        grayscaleselected:false,
+        sepiaselected:false,
+        embossselected:false,
+        invertselected:false,
+        sharpenselected:false,
+        pixelateselected:false,
+        maskclicked:false,
+    })
+    editorInstance.loadImageFromURL(this.props.imageSelected.name,"image");
+  }
 
   render(){
     const imgLibrary= this.state.imageLib.map((image)=>{

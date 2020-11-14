@@ -92,21 +92,22 @@ function Draw(props){
                         </Media>
                         </Button>
                         <hr/>
-                        <Button color='primary' outline className="mb-2" active={props.curMode==="edit"}  onClick={()=>props.handleDraw("edit")}> 
+                        <div className="row">
+                        <Button color='primary' outline className="ml-2" active={props.curMode==="edit"}  onClick={()=>props.handleDraw("edit")}> 
                         <Media >
                             <Media body>
                                 Edit: <i className="fa fa-mouse-pointer"></i>
                             </Media>
                         </Media>
                         </Button>
-                        <br/>
-                        <Button color='danger' outline  onClick={()=>props.removeDraw()}> 
+                        <Button color='danger' outline className="ml-2" onClick={()=>props.removeDraw()}> 
                         <Media >
                             <Media body>
                                 Delete
                             </Media>
                         </Media>
                         </Button>
+                        </div>
                     </CardText>
                     
                 </CardBody>
