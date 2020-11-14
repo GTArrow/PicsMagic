@@ -100,7 +100,8 @@ function Reform(props){
                                 </Media>
                                 </Button>
                                 <div className="row">
-                                <Button color="primary" outline className="ml-3"disabled={!isclicked} onClick={()=>props.Crop()}>Apply</Button>{' '}
+                                <Button color="primary" outline className="ml-2"disabled={!props.iscropmode} onClick={()=>props.Crop()}>Apply</Button>{' '}
+                                <Button color="danger" outline className="ml-2"disabled={!props.iscropmode} onClick={()=>props.cancelcrop()}>Cancel</Button>{' '}
                                 </div>
                             </CardText>
                             

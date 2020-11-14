@@ -54,7 +54,8 @@ function Mask(props){
                         <br/>
                     </CardTitle>
                     <CardText>
-                        <Button color='light' active={props.curMode==="free"}  disabled={isclicked} onClick={()=>{props.handleMask1('free');setisclicked(true)}}> 
+                        <Button color='light' active={props.curMode==="free"}  disabled={props.isclicked} 
+                        onClick={()=>{props.handleMask1('free');props.ismaskclicked(true)}}> 
                         <Media >
                             <Media body>
                                 <Media object src="images/Frames/frame1.jpg" width='50'  height = '100' alt="Frame1"/> 
@@ -62,7 +63,8 @@ function Mask(props){
                         </Media>
                         </Button>
                         {' '}
-                        <Button color='light' active={props.curMode==="free"} disabled={isclicked} onClick={()=>{props.handleMask2('free');setisclicked(true)}}> 
+                        <Button color='light' active={props.curMode==="free"} disabled={props.isclicked} 
+                        onClick={()=>{props.handleMask2('free');props.ismaskclicked(true)}}> 
                         <Media >
                             <Media body>
                                 <Media object src="images/Frames/frame2.jpg" width='50'  height = '100' alt="Frame2"/> 
@@ -73,7 +75,8 @@ function Mask(props){
                     
                     <CardText>
 
-                    <Button color='light' active={props.curMode==="free"}   disabled={isclicked} onClick={()=>{props.handleMask3('free');setisclicked(true)}}> 
+                    <Button color='light' active={props.curMode==="free"}   disabled={props.isclicked} 
+                    onClick={()=>{props.handleMask3('free');props.ismaskclicked(true)}}> 
                         <Media >
                             <Media body>
                                 <Media object src="images/Frames/frame3.jpg" width='100'  height = '50' alt="Frame3"/> 
@@ -83,7 +86,8 @@ function Mask(props){
                         </CardText>
                     
                         <CardText>
-                        <Button color='light' active={props.curMode==="free"} disabled={isclicked} onClick={()=>{props.handleMask4('free');setisclicked(true)}}> 
+                        <Button color='light' active={props.curMode==="free"} disabled={props.isclicked} 
+                        onClick={()=>{props.handleMask4('free');props.ismaskclicked(true)}}> 
                         <Media >
                             <Media body>
                                 <Media object src="images/Frames/frame5.jpg" width='100'  height = '50' alt="Frame4"/> 
@@ -97,7 +101,7 @@ function Mask(props){
 
                     <CardText>
                         <Button color='primary' outline
-                         active={props.curMode==="free"} onClick={()=>{props.applyMask();setisclicked(false)}}> 
+                         active={props.curMode==="free"} onClick={()=>{props.applyMask();props.ismaskclicked(false)}}> 
                         <Media >
                             <Media body>
                                 Apply
@@ -106,7 +110,8 @@ function Mask(props){
                         </Button>
                         {' '}
 
-                        <Button outline color='danger' active={props.curMode==="free"} onClick={()=>{props.deleteMask();setisclicked(false)}}> 
+                        <Button outline color='danger' active={props.curMode==="free"} 
+                        onClick={()=>{props.deleteMask();props.ismaskclicked(false)}}> 
                         <Media >
                             <Media body>
                                 Delete

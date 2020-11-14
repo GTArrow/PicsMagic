@@ -1,6 +1,6 @@
-import React, { Component} from "react";
+import React, { Component,useState,useEffect} from "react";
 import ImageEditor from "@toast-ui/react-image-editor";
-import {TabContent, TabPane,Nav, NavItem, NavLink,Button,Modal,ModalHeader,ModalBody,ModalFooter,Card,CardBody,CardTitle} from "reactstrap";
+import {Tooltip,Media,TabContent, TabPane,Nav, NavItem, NavLink,Button,Modal,ModalHeader,ModalBody,ModalFooter,Card,CardBody,CardTitle, UncontrolledTooltip} from "reactstrap";
 import Basics from "./BasicsComponent";
 import Filter from "./FilterComponent";
 import Reform from "./CropComponent";
@@ -50,21 +50,27 @@ class Home extends Component {
             a: '1'
         },
         textRange: { x: 50},
-        bold:false,
-        italic:false,
-        underline:false,
         selectedId: 0,
         brightnessrange:{x:0},
         noiserange:{x:0},
         blurrange:{x:0},
         cropsize:0,
         selectedImageId: 0,
+        bold:false,
+        italic:false,
+        underline:false,
         grayscaleselected:false,
         sepiaselected:false,
         embossselected:false,
         invertselected:false,
         sharpenselected:false,
-        pixelateselected:false
+        pixelateselected:false,
+        checkcropmode:false,
+        maskclicked:false,
+        tooltipOpen:false,
+        tooltipredo:false,
+        tooltipreset:false,
+
     }
     this.saveImageToDisk = this.saveImageToDisk.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -73,12 +79,29 @@ class Home extends Component {
     this.uploadHandleClick = this.uploadHandleClick.bind(this);
     this.uploadHandleChange = this.uploadHandleChange.bind(this);
     this.toggleTab = this.toggleTab.bind(this);
+    this.toggleUndo= this.toggleUndo.bind(this);
+    this.toggleRedo= this.toggleRedo.bind(this);
+    this.toggleReset= this.toggleReset.bind(this);
   }
   //Create editor instance reference
   imageEditor = React.createRef();
   //handle upload functions
   hiddenFileInput = React.createRef();
-
+  toggleUndo(){
+      this.setState({
+        tooltipOpen :!this.state.tooltipOpen
+        });
+  }
+  toggleRedo(){
+      this.setState({
+        tooltipredo :!this.state.tooltipredo
+        });
+  }
+  toggleReset(){
+    this.setState({
+        tooltipreset :!this.state.tooltipreset
+    });
+}
   toggleModal(){
       this.setState({
         isModalOpen :!this.state.isModalOpen
@@ -333,13 +356,13 @@ handleFlip(){
   startcropdrawingmode(size){
     switch (size) {
         case '1':
-            this.setState({curMode:'crop-square'});
+            this.setState({curMode:'crop'});
             break;
         case '1.75':
-            this.setState({curMode:'crop-4-3'});
+            this.setState({curMode:'crop'});
             break;
         case '1.77777':
-            this.setState({curMode:'crop-16-9'});
+            this.setState({curMode:'crop'});
             break;
     }
     const editorInstance = this.imageEditor.current.getInstance();
@@ -349,8 +372,14 @@ handleFlip(){
     }else{
         editorInstance.startDrawingMode('CROPPER');
         editorInstance.setCropzoneRect(size);
-        console.log(size);
     }
+    if(editorInstance.getDrawingMode()){
+        this.setState({checkcropmode:true});
+    }
+    else{
+        this.setState({checkcropmode:false});
+    }
+    console.log(editorInstance.getDrawingMode());
   }
 
   Crop(){
@@ -359,6 +388,22 @@ handleFlip(){
     editorInstance.deactivateAll();
     console.log(axis);
     editorInstance.crop(axis);
+    this.setState({checkcropmode:false});
+  }
+
+  cancelcrop(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    this.setState({curMode:'normal',checkcropmode:false})
+  }
+  checkcropmode(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    if(editorInstance.getDrawingMode()==='CROPPER'){
+        return true;
+    }
+    else{
+        return false;
+    }
   }
 
   Rotate(){
@@ -477,24 +522,42 @@ handleFlip(){
   }
   clearall(){
     const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.deactivateAll();
+    this.setState({    
+        brightnessrange:{x:0},
+        noiserange:{x:0},
+        blurrange:{x:0},
+        grayscaleselected:false,
+        sepiaselected:false,
+        embossselected:false,
+        invertselected:false,
+        sharpenselected:false,
+        pixelateselected:false,
+        maskclicked:false,
+    })
     editorInstance.loadImageFromURL(this.props.imageSelected.name,"image");
   }
 
 //Handle Mask Feature
-
+ismaskclicked(condition){
+    if(condition==true){
+        this.setState({maskclicked:true})
+    }
+    else{
+        this.setState({maskclicked:false})
+    }
+    
+}
 handleMask1(mode){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
     editorInstance.addImageObject('images/Frames/frame1.jpg');
-    console.log(this.state.selectedImageId);
-    
 }
 
 handleMask2(mode){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    editorInstance.addImageObject('images/Frames/frame2.jpg');
-    console.log(this.state.selectedImageId);
+    editorInstance.addImageObject('images/Frames/frame2.jpg')
     
 }
 
@@ -502,7 +565,6 @@ handleMask3(mode){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
     editorInstance.addImageObject('images/Frames/frame3.jpg');
-    console.log(this.state.selectedImageId);
     
 }
 
@@ -510,7 +572,6 @@ handleMask4(mode){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
     editorInstance.addImageObject('images/Frames/frame5.jpg');
-    console.log(this.state.selectedImageId);
     
 }
 
@@ -701,21 +762,31 @@ removeSticker(){
                         <br />
                         <br />
                         
-                        <Button outline color="info" block className="mt-2"
+                        <Button id="undo"outline color='light' block className="mt-2"
                             onClick={()=>{this.undo()}}
                         >
-                            Undo
+                            <Media object src="images/undo.png" width='30' />
                         </Button>
-                        <Button outline color="warning" block className="mt-2"
+                        <Tooltip placement="right" isOpen={this.state.tooltipOpen} target="undo" toggle={this.toggleUndo}>
+                            Undo
+                        </Tooltip>
+
+                        <Button id="redo"outline color='light' block className="mt-2"
                             onClick={()=>{this.redo()}}
                         >
-                            Redo
+                            <Media object src="images/redo.png" width='30' />
                         </Button>
-                        <Button outline color="danger" block className="mt-2"
+                        <Tooltip placement="right" isOpen={this.state.tooltipredo} target="redo" toggle={this.toggleRedo}>
+                            Redo
+                        </Tooltip>
+                        <Button id="reset"outline color='light' block className="mt-2"
                             onClick={()=>{this.clearall()}}
                         >
-                            Reset
+                            <Media object src="images/circle-regular.png" width='30' />
                         </Button>
+                        <Tooltip placement="right" isOpen={this.state.tooltipreset} target="reset" toggle={this.toggleReset}>
+                            Reset
+                        </Tooltip>
                     </div>
                     <div className="col-md-8 col-12 justify-content-center">
                         <TabContent activeTab={this.state.activeTab}>
@@ -754,6 +825,8 @@ removeSticker(){
                             Crop={()=>this.Crop()}
                             curMode={this.state.curMode}
                             buttonactive={this.state.cropactive}
+                            iscropmode={this.state.checkcropmode}
+                            cancelcrop={()=>this.cancelcrop()}
                             />
                             </TabPane>
                             <TabPane tabId="4" >
@@ -807,6 +880,8 @@ removeSticker(){
                             applyMask={()=>this.applyMask()}
                             deleteMask={()=>this.deleteMask()}
                             curMode={this.state.curMode}
+                            isclicked={this.state.maskclicked}
+                            ismaskclicked={(condition)=>this.ismaskclicked(condition)}
                             />
                             </TabPane>
                         </TabContent>
