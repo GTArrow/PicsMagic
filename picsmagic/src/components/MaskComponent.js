@@ -11,7 +11,7 @@ function Mask(props){
                     <CardTitle tag="h6" >
                         Select A Frame
                         <span className='select-icon'>
-                       <i class="fa fa-hand-o-down" aria-hidden="true"></i>
+                       <i className="fa fa-hand-o-down" aria-hidden="true"></i>
                         </span>
                         <br/>
                     </CardTitle>

@@ -180,7 +180,6 @@ stopDrawingMode(){
 
 //Handle the sleection event when an object is selected
 handleSelection(props){
-    console.log(props);
     if(props.type==='i-text'){
         this.setState({selectedTextId:props.id});
         this.setState({textRange:{x:parseInt(props.fontSize, 10)}});
@@ -527,6 +526,14 @@ handleFlip(){
   }
 
 //Handle Mask Feature
+startMaskMode(){
+    const editorInstance = this.imageEditor.current.getInstance();
+    editorInstance.stopDrawingMode();
+    const rect={
+        left: 0, top: 0, width: 980, height: 580
+    }
+    editorInstance.crop(rect);
+}
 ismaskclicked(condition){
     if(condition==true){
         this.setState({maskclicked:true})
@@ -565,10 +572,9 @@ handleMask4(){
 
 applyMask(){
     const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.deactivateAll();
+    //editorInstance.deactivateAll();
     editorInstance.applyFilter('mask',{maskObjId:this.state.selectedImageId});
     this.setState({isMaskMode:false});
-    
 }
 
 deleteMask(){
@@ -770,7 +776,7 @@ removeSticker(){
                                     Text
                                 </NavLink>
                             </NavItem>
-                            <NavItem onClick={()=>this.stopDrawingMode()}>
+                            <NavItem onClick={()=>this.startMaskMode()}>
                                 <NavLink
                                     className={classnames({active: this.state.activeTab === '7'})}
                                     onClick={() => {
@@ -864,7 +870,6 @@ removeSticker(){
                             removeDraw={()=>this.removeDraw()}/>
                             </TabPane>
                             <TabPane tabId="5">
-                            {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
                             <Sticker 
                             color={this.state.drawColor} 
                             range={this.state.drawRange}
@@ -895,7 +900,6 @@ removeSticker(){
                             />
                             </TabPane>
                             <TabPane tabId="7">
-                            {/*<Basics handleFlip={()=>this.handleFlip()} /> */}
                             <Mask 
                             color={this.state.drawColor} 
                             range={this.state.drawRange}
