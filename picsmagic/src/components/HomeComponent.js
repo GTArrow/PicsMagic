@@ -526,14 +526,6 @@ handleFlip(){
   }
 
 //Handle Mask Feature
-startMaskMode(){
-    const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.stopDrawingMode();
-    const rect={
-        left: 0, top: 0, width: 980, height: 580
-    }
-    editorInstance.crop(rect);
-}
 ismaskclicked(condition){
     if(condition==true){
         this.setState({maskclicked:true})
@@ -546,27 +538,46 @@ ismaskclicked(condition){
 handleMask1(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    editorInstance.addImageObject('images/Frames/frame1.jpg');
+    const rect={
+        left: 0, top: 0, width: 980, height: 580
+    }
+    editorInstance.crop(rect).then(()=>{
+        editorInstance.addImageObject('images/Frames/frame1.jpg');
+    });
 }
 
 handleMask2(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    editorInstance.addImageObject('images/Frames/frame2.jpg')
-    
+    const rect={
+        left: 0, top: 0, width: 980, height: 580
+    }
+    editorInstance.crop(rect).then(()=>{
+        editorInstance.addImageObject('images/Frames/frame2.jpg');
+    });
 }
 
 handleMask3(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    editorInstance.addImageObject('images/Frames/frame3.jpg');
+    const rect={
+        left: 0, top: 0, width: 980, height: 580
+    }
+    editorInstance.crop(rect).then(()=>{
+        editorInstance.addImageObject('images/Frames/frame3.jpg');
+    });
     
 }
 
 handleMask4(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    editorInstance.addImageObject('images/Frames/frame5.jpg');
+    const rect={
+        left: 0, top: 0, width: 980, height: 580
+    }
+    editorInstance.crop(rect).then(()=>{
+        editorInstance.addImageObject('images/Frames/frame5.jpg');
+    });
     
 }
 
@@ -776,7 +787,7 @@ removeSticker(){
                                     Text
                                 </NavLink>
                             </NavItem>
-                            <NavItem onClick={()=>this.startMaskMode()}>
+                            <NavItem onClick={()=>this.stopDrawingMode()}>
                                 <NavLink
                                     className={classnames({active: this.state.activeTab === '7'})}
                                     onClick={() => {
