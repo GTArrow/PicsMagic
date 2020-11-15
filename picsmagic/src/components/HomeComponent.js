@@ -180,6 +180,7 @@ stopDrawingMode(){
 
 //Handle the sleection event when an object is selected
 handleSelection(props){
+    console.log(props);
     if(props.type==='i-text'){
         this.setState({selectedTextId:props.id});
         this.setState({textRange:{x:parseInt(props.fontSize, 10)}});
@@ -201,7 +202,7 @@ handleSelection(props){
         }
         this.setState({curMode:props.textAlign});
     }
-    if(props.type==='path'){
+    if(props.type==='path'|| props.type==='line'){
         this.setState({selectedDrawId:props.id});
     }
     if(props.type==='image'){
