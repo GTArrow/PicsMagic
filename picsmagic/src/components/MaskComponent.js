@@ -88,9 +88,9 @@ function Mask(props){
                          <Alert color="warning" >
                          <h6 className="alert-heading">Please read this before you select a frame!</h6>
                          <hr />
-                         Once you click on a frame, all the effects you have applied on the image will be saved, and no longer editable<br />
+                         Once you click a frame, all the effects you have applied on the image will be saved, and no longer editable<br />
                          <hr />
-                         Please be careful before you selected a frame<br />
+                         Please be careful before you select a frame<br />
                            </Alert>
 
                      </CardText>
