@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Card, CardBody,CardTitle,CardText,Media,  Alert} from "reactstrap";
+import {Button, Card, CardBody,CardTitle,CardText,Media,  Alert, Tooltip} from "reactstrap";
 
 
 function Mask(props){
@@ -86,11 +86,12 @@ function Mask(props){
 
                     <CardText>
                          <Alert color="warning" >
-                         <h6 className="alert-heading">Please be Careful!</h6>
+                         <h6 className="alert-heading">Please read this before you select a frame!</h6>
                          <hr />
-                         Once a mask is applied, you can only reset the image to remove the mask. <br />
+                         Once you click a frame, all the effects you have applied on the image will be saved, and no longer editable<br />
                          <hr />
-                         "Reset" button would remove all the current effects on the image. Please download your work before apply a mask.  </Alert>
+                         Please be careful before you select a frame<br />
+                           </Alert>
 
                      </CardText>
                     
