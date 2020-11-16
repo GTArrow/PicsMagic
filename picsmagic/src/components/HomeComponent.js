@@ -73,7 +73,7 @@ class Home extends Component {
         tooltipOpen:false,
         tooltipredo:false,
         tooltipreset:false,
-
+        filterUsed:[]
     }
     this.saveImageToDisk = this.saveImageToDisk.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -119,11 +119,11 @@ class Home extends Component {
   }
   confirmModal(){
     const editorInstance = this.imageEditor.current.getInstance();
-    editorInstance.loadImageFromURL(this.props.imageSelected.name,"image");
+    editorInstance.loadImageFromURL(this.state.imageSelected.name,"image");
     this.props.changeImageSelected(this.state.imageSelected);
     this.props.changeImageLib(this.state.imageLib);
     this.props.changeCurId(this.state.curId);
-    this.toggleModal();
+    this.toggleModal()
     }
   
   //Saving method. Will be used later
@@ -155,22 +155,26 @@ class Home extends Component {
   /*Call a function (passed as a prop from the parent component)
    to handle the user-selected file */
   uploadHandleChange (event) {
-      const files = event.target.files;
-      var fileList=[];
-      var id = this.state.curId;
+    const files = event.target.files;
+    const { imageLib } = this.state;
+    var fileList=[];
+    var id = this.state.curId;
       for(var i =0; i<files.length;i++){
         const fileUploaded = URL.createObjectURL(files[i]);
         const newImage = {
             name: fileUploaded,
-            id: id+1
+            id: id+1,
+            width:0,
+            height:0
         }
         id+=1;
         fileList.push(newImage);
-      }
-      this.setState({
+    }
+      //console.log(fileList);
+    this.setState({
         curId:id,
-        imageLib: this.state.imageLib.concat(fileList)
-    });
+        imageLib: imageLib.concat(fileList)
+    }); 
   };
 //Return back to the Nomal mode befor all features
 stopDrawingMode(){
@@ -435,10 +439,16 @@ handleFlip(){
     const editorInstance = this.imageEditor.current.getInstance();
     if(this.state.grayscaleselected==false){
         editorInstance.applyFilter('Grayscale');
-        this.setState({grayscaleselected:true});
+        this.setState({
+            grayscaleselected:true,
+            filterUsed:[...this.state.filterUsed,'Grayscale']
+        });
     }
     else{
-        this.setState({grayscaleselected:false});
+        this.setState({
+            grayscaleselected:false,
+            filterUsed: this.state.filterUsed.filter((f)=>f!=='Grayscale')
+        });
         editorInstance.removeFilter('Grayscale');
     }
   }
@@ -447,10 +457,16 @@ handleFlip(){
     const editorInstance = this.imageEditor.current.getInstance();
     if(this.state.sepiaselected==false){
         editorInstance.applyFilter('Sepia');
-        this.setState({sepiaselected:true});
+        this.setState({
+            sepiaselected:true,
+            filterUsed:[...this.state.filterUsed,'Sepia']
+        });
 ;    }
     else{
-        this.setState({sepiaselected:false});
+        this.setState({
+            sepiaselected:false,
+            filterUsed: this.state.filterUsed.filter((f)=>f!=='Sepia')
+        });
         editorInstance.removeFilter('Sepia');
     }
   }
@@ -459,10 +475,17 @@ handleFlip(){
     const editorInstance = this.imageEditor.current.getInstance();
     if(this.state.embossselected==false){
         editorInstance.applyFilter('Emboss');
+        this.setState({
+            embossselected:true,
+            filterUsed:[...this.state.filterUsed,'Emboss']
+        });
         this.setState({embossselected:true});
 }
     else{
-        this.setState({embossselected:false});
+        this.setState({
+            embossselected:false,
+            filterUsed: this.state.filterUsed.filter((f)=>f!=='Emboss')
+        });
         editorInstance.removeFilter('Emboss');
     }
   }
@@ -471,10 +494,17 @@ handleFlip(){
     const editorInstance = this.imageEditor.current.getInstance();
     if(this.state.invertselected==false){
         editorInstance.applyFilter('Invert');
+        this.setState({
+            invertselected:true,
+            filterUsed:[...this.state.filterUsed,'Invert']
+        });
         this.setState({invertselected:true});
     }
     else{
-        this.setState({invertselected:false});
+        this.setState({
+            invertselected:false,
+            filterUsed: this.state.filterUsed.filter((f)=>f!=='Invert')
+        });
         editorInstance.removeFilter('Invert')
     }
   }
@@ -483,10 +513,17 @@ handleFlip(){
     const editorInstance = this.imageEditor.current.getInstance();
     if(this.state.sharpenselected==false){
         editorInstance.applyFilter('Sharpen');
+        this.setState({
+            sharpenselected:true,
+            filterUsed:[...this.state.filterUsed,'Sharpen']
+        });
         this.setState({sharpenselected:true});
     }
     else{
-        this.setState({sharpenselected:false});
+        this.setState({
+            sharpenselected:false,
+            filterUsed: this.state.filterUsed.filter((f)=>f!=='Sharpen')
+        });
         editorInstance.removeFilter('Sharpen')
     }
     
@@ -496,10 +533,17 @@ handleFlip(){
     const editorInstance = this.imageEditor.current.getInstance();
     if(this.state.pixelateselected==false){
         editorInstance.applyFilter('Pixelate');
+        this.setState({
+            pixelateselected:true,
+            filterUsed:[...this.state.filterUsed,'Pixelate']
+        });
         this.setState({pixelateselected:true});
     }
     else{
-        this.setState({pixelateselected:false});
+        this.setState({
+            pixelateselected:false,
+            filterUsed: this.state.filterUsed.filter((f)=>f!=='Pixelate')
+        });
         editorInstance.removeFilter('Pixelate')
     }
     
@@ -538,53 +582,56 @@ ismaskclicked(condition){
 handleMask1(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    const rect={
-        left: 0, top: 0, width: 980, height: 580
-    }
-    editorInstance.crop(rect).then(()=>{
-        editorInstance.addImageObject('images/Frames/frame1.jpg');
-    });
+    editorInstance.addImageObject('images/Frames/frame1.jpg');
 }
 
 handleMask2(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    const rect={
-        left: 0, top: 0, width: 980, height: 580
-    }
-    editorInstance.crop(rect).then(()=>{
-        editorInstance.addImageObject('images/Frames/frame2.jpg');
-    });
+    editorInstance.addImageObject('images/Frames/frame2.jpg');
 }
 
 handleMask3(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    const rect={
-        left: 0, top: 0, width: 980, height: 580
-    }
-    editorInstance.crop(rect).then(()=>{
-        editorInstance.addImageObject('images/Frames/frame3.jpg');
-    });
+    editorInstance.addImageObject('images/Frames/frame3.jpg');
     
 }
 
 handleMask4(){
     const editorInstance = this.imageEditor.current.getInstance();
     editorInstance.deactivateAll();
-    const rect={
-        left: 0, top: 0, width: 980, height: 580
-    }
-    editorInstance.crop(rect).then(()=>{
-        editorInstance.addImageObject('images/Frames/frame5.jpg');
-    });
+    editorInstance.addImageObject('images/Frames/frame5.jpg');
     
 }
 
 applyMask(){
     const editorInstance = this.imageEditor.current.getInstance();
-    //editorInstance.deactivateAll();
-    editorInstance.applyFilter('mask',{maskObjId:this.state.selectedImageId});
+    const myArray = this.state.filterUsed;
+    //const myArray=['Grayscale','Invert'];
+    if(myArray.length>0){
+        var p = editorInstance.removeFilter('');
+        myArray.forEach((filter)=>{
+        //console.log(filter);
+        p= p.then(()=>{
+            editorInstance.removeFilter(filter);
+        })
+        })
+        p = p.then(()=>{
+            editorInstance.applyFilter('mask',{maskObjId:this.state.selectedImageId});
+        })
+        
+        myArray.forEach((filter)=>{
+            //console.log(filter);
+            p= p.then(()=>{
+                editorInstance.applyFilter(filter);
+            })
+            //console.log(p);
+        })
+    }else{
+        editorInstance.applyFilter('mask',{maskObjId:this.state.selectedImageId});
+    }
+    
     this.setState({isMaskMode:false});
 }
 

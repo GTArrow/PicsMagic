@@ -1,0 +1,64 @@
+06b3e64 was Chen Yijun, 60 minutes ago, message: Merge branch 'main' of https://github.com/GTArrow/PicsMagic into main
+a49a9dc was Chen Yijun, 61 minutes ago, message: bug in Mask fixed
+28b32d2 was Susan Chen, 63 minutes ago, message: Update Mask Warning
+76c4a5b was Susan Chen, 72 minutes ago, message: Update Mask Warning
+2195ed0 was Chen Yijun, 89 minutes ago, message: fixed bugs in mask
+ead5c98 was Chen Yijun, 4 hours ago, message: bugs in draw fixed
+98f9a3c was Chen Yijun, 8 hours ago, message: minor bugs fixed in draw
+60895ff was Chen Yijun, 9 hours ago, message: minor chanegs in Crop Ui
+53e5071 was Chen Yijun, 10 hours ago, message: restyled the color picker, two more colors added
+d68c673 was Chen Yijun, 10 hours ago, message: fixed bugs in Reform and Mask, refined the code for all components
+d7722ca was Ace Huang, 21 hours ago, message: edit styles, button layouts, format code, removed unused and test codes
+156840e was Ace Huang, 22 hours ago, message: modify merge
+2e598c5 was Ace Huang, 22 hours ago, message: edit state management, changed icons, added cancel button on crop function
+a8cf59e was Chen Yijun, 25 hours ago, message: Merge branch 'main' of https://github.com/GTArrow/PicsMagic into main
+183344e was Chen Yijun, 25 hours ago, message: add delete to Draw and Text
+4d76161 was Susan Chen, 27 hours ago, message: Update the mask alert and help center style
+0818cc5 was Chen Yijun, 2 days ago, message: bugs of not stopping draingmode fixed
+6406095 was Chen Yijun, 2 days ago, message: help center styleing added
+859828c was Susan Chen, 2 days ago, message: Update search link
+03483a3 was Susan Chen, 2 days ago, message: Update HelpCenter.js
+2fed4a6 was Susan Chen, 2 days ago, message: Update the answers for Help Center
+2365d46 was Chen Yijun, 2 days ago, message: Download action added, Home Ui adjusted
+f6df533 was Chen Yijun, 2 days ago, message: commit for merge
+7ee06f5 was Chen Yijun, 2 days ago, message: changes in UI
+af64a40 was Ace Huang, 2 days ago, message: add scroll bar for the side nav
+69f6e5f was Ace Huang, 2 days ago, message: change filter panel layout
+bdb596b was Ace Huang, 2 days ago, message: add functions to crop panel, changed ui for filte panel
+d5893b9 was Ace Huang, 2 days ago, message: changed filter UI, added more functions for reform panel
+db4fe6e was Chen Yijun, 2 days ago, message: changes in Help Center hyperlink
+e541234 was Chen Yijun, 2 days ago, message: minor changes in Reform UI
+daea247 was Chen Yijun, 2 days ago, message: Reform feature UI changed, highlight added
+27016e4 was Susan Chen, 2 days ago, message: Update sidebar layout
+c5244d9 was Susan Chen, 2 days ago, message: Add Mask Feature
+081caf7 was Susan Chen, 2 days ago, message: Update Sticker Function
+0719444 was Susan Chen, 2 days ago, message: Merge branch 'main' of https://github.com/GTArrow/PicsMagic into main
+50fe6e1 was Susan Chen, 2 days ago, message: Update and organize the images
+f0b670d was Ace Huang, 2 days ago, message: fix bugs in crop
+a34ae45 was Ace Huang, 2 days ago, message: fix bugs in crop
+d4adbfd was Chen Yijun, 2 days ago, message: changes in UI
+38624d2 was Chen Yijun, 2 days ago, message: changes in UI, add Redo and Reset button
+0bc0a21 was Susan Chen, 3 days ago, message: Update the Sticker Funtionality
+b50d493 was Susan Chen, 3 days ago, message: Update the layout and style
+fba7d8f was Chen Yijun, 3 days ago, message: minor changes in UI
+77430cb was Ace Huang, 3 days ago, message: fixed compile error
+d84d1fb was Ace Huang, 3 days ago, message: add basic, filter and reform functions, created undo and clearallobject button. Combine and format the code.
+d7e0d33 was Ace Huang, 3 days ago, message: add basic, filter and reform functions, created undo and clearallobject button. Combine and format the code.
+8940218 was Susan Chen, 4 days ago, message: Update Helpcenter with Search
+6f70e61 was Susan Chen, 5 days ago, message: Adding HelpCenter Page
+a5bcc21 was Chen Yijun, 5 days ago, message: minor changes to home, text bugs fixed
+80c0a01 was Chen Yijun, 5 days ago, message: Text feature added
+f42a765 was Chen Yijun, 6 days ago, message: Stop drawing mode when other tab clicked
+ef492f6 was Chen Yijun, 6 days ago, message: minor changes in draw.js(Editing mode added)
+e8f4390 was Chen Yijun, 6 days ago, message: Drawing feature added
+383ed7b was Chen Yijun, 6 days ago, message: Header Logo added
+d74f387 was Chen Yijun, 6 days ago, message: Changes on sidebar structure
+ac17699 was Chen Yijun, 6 days ago, message: Visual Effects feature structure created
+a28e1b8 was Chen Yijun, 8 days ago, message: Multiple Files Upload added
+eb4b7f3 was Chen Yijun, 8 days ago, message: File Upload && Library System created
+c139dcf was Chen Yijun, 8 days ago, message: changes made to HomeComponent, canvas adjusted
+890aa8a was Chen Yijun, 9 days ago, message: Comments added
+b09a4ee was Chen Yijun, 9 days ago, message: Basic Image Editor Canvas added
+f126777 was Chen Yijun, 9 days ago, message: PhotoEditor UI example added
+c154c8c was Chen Yijun, 10 days ago, message: Header&Footer added
+83de687 was Yijun Chen, 10 days ago, message: Initial commit

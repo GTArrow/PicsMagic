@@ -8,12 +8,12 @@ import { createBrowserHistory as createHistory } from "history";
 const history = createHistory();
 const images=
     [
-    {name:"images/mcmaster0.jpg", id:1},
-    {name:"images/mcmaster1.jpg", id:2},
-    {name:"images/mcmaster2.jpg", id:3},
-    {name:"images/mcmaster3.jpg", id:4},
-    {name:"images/mcmaster4.jpg", id:5},
-    {name:"images/mcmaster5.jpg", id:6},
+    {name:"images/mcmaster0.jpg", id:1,width:980,height:580},
+    {name:"images/mcmaster1.jpg", id:2,width:980,height:580},
+    {name:"images/mcmaster2.jpg", id:3,width:600,height:399},
+    {name:"images/mcmaster3.jpg", id:4,width:900,height:506},
+    {name:"images/mcmaster4.jpg", id:5,width:980,height:580},
+    {name:"images/mcmaster5.jpg", id:6,width:1170,height:610},
     ]
 
 class Main extends Component {
@@ -21,7 +21,7 @@ class Main extends Component {
     super(props);
     this.state={
       imageLib:images,
-      imageSelected:{name:"images/mcmaster0.jpg",id:"1"},
+      imageSelected:{name:"images/mcmaster0.jpg",id:1,width:980,height:580},
       curId:6
     }
   }

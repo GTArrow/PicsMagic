@@ -86,11 +86,10 @@ function Mask(props){
 
                     <CardText>
                          <Alert color="warning" >
-                         <h6 className="alert-heading">Please read this before you select a frame!</h6>
+                         <h6 className="alert-heading">Please read this carefully before you apply a frame!</h6>
                          <hr />
-                         Once you click a frame, all the effects you have applied on the image will be saved, and no longer editable<br />
+                         Once a frame is applied, you will not be able to undo the operation. Reset is allowed, but you will lose all your work.<br />
                          <hr />
-                         Please be careful before you select a frame<br />
                            </Alert>
 
                      </CardText>
