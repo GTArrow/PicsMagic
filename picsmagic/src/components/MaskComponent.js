@@ -88,9 +88,9 @@ function Mask(props){
                          <Alert color="warning" >
                          <h6 className="alert-heading">Please read this carefully before you apply a frame!</h6>
                          <hr />
-                         Once a frame is applied, you will not be able to undo the operation. Reset is allowed, but you will lose all your work.<br />
+                         Once a frame is applied, you will not be able to undo the operation. Only Reset is allowed, but all the current effects on the image will be removed.<br />
                          <hr />
-                           </Alert>
+                                                    </Alert>
 
                      </CardText>
                     
