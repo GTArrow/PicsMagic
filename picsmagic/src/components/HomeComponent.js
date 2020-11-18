@@ -403,6 +403,7 @@ handleFlip(){
   }
 
   Crop(){
+    this.setState({filterUsed:[]});
     const editorInstance = this.imageEditor.current.getInstance();
     const axis=editorInstance.getCropzoneRect();
     editorInstance.deactivateAll();
@@ -720,6 +721,7 @@ removeSticker(){
         italic:false,
         underline:false,
         curMode:"normal",
+        filterUsed:[]
 
     })
     editorInstance.stopDrawingMode();
